@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobileSoLienLac.Views.ChangePass"
+             xmlns:vm="clr-namespace:MobileSoLienLac.ViewModels"
+             xmlns:controls="clr-namespace:MobileSoLienLac.Controls;assembly=MobileSoLienLac"
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <vm:ChangePassViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Margin="20"
+            VerticalOptions="CenterAndExpand">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <controls:CustomEntry x:Name="Entry_OldPass"
+                                      Grid.Column="0" Grid.ColumnSpan="2"
+                                      Placeholder="Mật Khẩu"
+                                      IsPassword="True"
+                                      CornerRadius="15"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand"/>
+                <Image Source="hiden.png"
+                       Grid.Column="1"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand"
+                       Margin="5" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Entry_OldPass_OnTapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <controls:CustomEntry x:Name="Entry_NewPass"
+                                      Grid.Column="0" Grid.ColumnSpan="2"
+                                      Placeholder="Mật Khẩu"
+                                      IsPassword="True"
+                                      CornerRadius="15"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand"/>
+                <Image Source="hiden.png"
+                       Grid.Column="1"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand"
+                       Margin="5" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Entry_NewPass_OnTapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <controls:CustomEntry x:Name="Entry_ComplePass"
+                                      Grid.Column="0" Grid.ColumnSpan="2"
+                                      Placeholder="Mật Khẩu"
+                                      IsPassword="True"
+                                      CornerRadius="15"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand"/>
+                <Image Source="hiden.png"
+                       Grid.Column="1"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand"
+                       Margin="5" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Entry_ComplePass_OnTapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+            </Grid>
+            <Button x:Name="btnChange" Text="Đổi mât khẩu" Clicked="btnChange_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage> 

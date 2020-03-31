@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobileSoLienLac.Views.InfoStudent"
+             Title="Thông tin học sinh">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Image Source="https://png.pngtree.com/png-clipart/20190604/original/pngtree-naughty-monkey-png-image_856184.jpg"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0"
+                           Text="Tên:" FontSize="Large"/>
+                    <Label Text="{Binding Ten}" FontSize="Large"
+                           Grid.Row="0" Grid.Column="1"/>
+                    <Label Text="Giới tính:" FontSize="Large"
+                           Grid.Row="1" Grid.Column="0"/>
+                    <Label Text="{Binding GioiTinh, Converter={StaticResource ConvertByteToSex}}"
+                           FontSize="Large"
+                           Grid.Row="1" Grid.Column="1"/>
+                    <Label Text="Lớp :" FontSize="Large"
+                           Grid.Row="2" Grid.Column="0"/>
+                    <Label Text="{Binding TenLop}" FontSize="Large"
+                           Grid.Row="2" Grid.Column="1"/>
+                    <Label Text="Ngày sinh:"  FontSize="Large"
+                           Grid.Row="3" Grid.Column="0"/>
+                    <Label Text="{Binding NgaySinh , Converter={StaticResource ConvertDateTimeToDate}}" 
+                           FontSize="Large"
+                           Grid.Row="3" Grid.Column="1"/>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+        <!--<StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Giới tính:" FontSize="Large"/>
+                <Label Text="{Binding GioiTinh, Converter={StaticResource ConvertByteToSex}}" FontSize="Large"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Nơi Sinh:" FontSize="Large"/>
+                <Label Text="{Binding NoiSinh}" FontSize="Large"/>
+            </StackLayout>
+        </StackLayout>-->
+    </ContentPage.Content>
+</ContentPage>

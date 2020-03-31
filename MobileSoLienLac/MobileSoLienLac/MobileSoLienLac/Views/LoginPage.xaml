@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Name="ContentPageLogin"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:MobileSoLienLac.Controls"
+             mc:Ignorable="d"
+             x:Class="MobileSoLienLac.Views.Login"
+             BackgroundColor="White">
+    <ContentPage.BackgroundImageSource>
+        backgroup.png
+    </ContentPage.BackgroundImageSource>
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <StackLayout VerticalOptions="EndAndExpand"
+                         TranslationY="{Binding Source={x:Reference btn_Login}, Path= Width}">
+                <!--input username in here-->
+                    <controls:CustomEntry x:Name="Entry_Username"
+                                      Placeholder="Tài khoản/ Số điện thoại"
+                                      CornerRadius="15"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand"
+                                      Completed="Entry_Username_OnCompleted"/>
+                    <!--input password in here-->
+                    <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <controls:CustomEntry x:Name="Entry_Password"
+                                                  Grid.Column="0" Grid.ColumnSpan="2"
+                                                  Placeholder="Mật Khẩu"
+                                                  IsPassword="True"
+                                                  CornerRadius="15"
+                                                  HorizontalOptions="FillAndExpand"
+                                                  VerticalOptions="FillAndExpand"
+                                                  Completed="Entry_Password_OnCompleted"/>
+                    <Image Source="hiden.png"
+                                   Grid.Column="1"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="FillAndExpand"
+                                   Margin="5" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                            
+                    </Grid>
+                    <Button x:Name="btn_Login"
+                    Text="Đăng nhập"
+                    VerticalOptions="Center"
+                        HorizontalOptions="CenterAndExpand"
+                    Clicked="btn_Login_Clicked"/>
+                    </StackLayout>
+            <Button x:Name="btn_Close"
+                        Text="Thoát"
+                        VerticalOptions="EndAndExpand"
+                        HorizontalOptions="Center"
+                        Clicked="btn_Close_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
