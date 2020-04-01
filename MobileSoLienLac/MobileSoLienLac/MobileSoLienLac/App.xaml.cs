@@ -31,6 +31,16 @@ namespace MobileSoLienLac
             MainPage = new Login();
         }
 
+        public static void ResetSource()
+        {
+            lstPHvsHs = new List<LienKetPHvsHS>();
+            lstStudents = new List<ThongTinHS>();
+            StudentSeclect = new ThongTinHS();
+            lstLops = new List<Lop>();
+            lstKhois = new List<Khoi>();
+            IDAccount = -1;
+        }
+
         protected override void OnStart()
         {
             

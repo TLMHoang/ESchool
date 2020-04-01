@@ -19,7 +19,9 @@ namespace MobileSoLienLac.Views
     public partial class Login : ContentPage
     {
         public Khoi valKhoi = new Khoi();
-        public Lop valLop;
+        public Lop valLop = new Lop();
+        public LienKetPHvsHS valLK = new LienKetPHvsHS();
+        public ThongTinHS valHS = new ThongTinHS();
         public HandleError error;
         public Login()
         {
@@ -27,23 +29,77 @@ namespace MobileSoLienLac.Views
             //img_Logo.Source = ImageSource.FromFile("sourcelogo.png");
         }
 
-        public async Task LoadClass()
+        public async Task<bool> LoadDataInDatabase()
         {
-            DataTable dtk = new DataTable();
-            dtk = await valKhoi.GetData();
+            #region Load grade
+
+            DataTable dtk = await valKhoi.GetData();
             if (dtk.Columns.Count == 1)
             {
-                Toast.MakeText(Android.App.Application.Context, "Mạng yếu vui lòng đợi", ToastLength.Long).Show();
-                dtk = new DataTable();
-                await valKhoi.GetData();
-                if (dtk.Columns.Count == 1)
-                {
-                    await DisplayAlert("Thông báo",error.IDErrorToNotify(Convert.ToInt32(dtk.Rows[0]["Error"])) , "OK");
-                    btn_Login.IsEnabled = true;
-                    return;
-                }
+                await DisplayAlert("Thông báo",error.IDErrorToNotify(Convert.ToInt32(dtk.Rows[0]["Error"])) , "OK");
+                btn_Login.IsEnabled = true;
+                App.ResetSource();
+                return false;
             }
-            App.lstLops = await new Lop().GetList();
+            else
+            {
+                App.lstKhois = valKhoi.GetData(dtk);
+            }
+
+            #endregion
+
+            #region Load Class
+
+            DataTable dtl = await valLop.GetData();
+            if (dtk.Columns.Count == 1)
+            {
+                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dtl.Rows[0]["Error"])), "OK");
+                btn_Login.IsEnabled = true;
+                App.ResetSource();
+                return false;
+            }
+            else
+            {
+                App.lstLops =  valLop.GetData(dtl);
+            }
+
+            #endregion
+
+            #region get link SP vs St
+
+            DataTable dtlk = await valLK.GetData(App.IDAccount);
+            if (dtk.Columns.Count == 1)
+            {
+                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dtlk.Rows[0]["Error"])), "OK");
+                btn_Login.IsEnabled = true;
+                App.ResetSource();
+                return false;
+            }
+            else
+            {
+                App.lstPHvsHs = valLK.GetData(dtlk);
+            }
+
+            #endregion
+            foreach (LienKetPHvsHS i in App.lstPHvsHs)
+            {
+               DataTable dtS = await valHS.GetDaTa(i.IDHocSinh);
+               if (dtS.Columns.Count == 1)
+               {
+                   await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dtlk.Rows[0]["Error"])), "OK");
+                   btn_Login.IsEnabled = true;
+                   App.ResetSource();
+                   return false;
+                }
+               else
+               {
+                   App.lstStudents.Add(new ThongTinHS(dtS.Rows[0]));
+               }
+            }
+
+            App.StudentSeclect = App.lstStudents.FirstOrDefault();
+
+            return true;
         }
 
         private async void btn_Login_Clicked(object sender, EventArgs e)
@@ -55,23 +111,23 @@ namespace MobileSoLienLac.Views
                 string strRetrun = (await new LoginViewModel().CheckLogin(Entry_Username.Text, Entry_Password.Text));
                 if (strRetrun.Length == 0)
                 {
-                    await LoadClass();
-                    await DisplayAlert("Thông báo", "Đăng nhập thành công", "Ok");
+                    if (await LoadDataInDatabase())
+                    {
+                        await DisplayAlert("Thông báo", "Đăng nhập thành công", "Ok");
 
-                    //while (App.lstKhois.Count == 0 || App.lstLops.Count == 0)
-                    //{
-                    //    if (expr)
-                    //    {
-
-                    //    }
-                    //}
-                    App.StudentSeclect = App.lstStudents.FirstOrDefault();
-
-                    Application.Current.MainPage = new MainPage();
+                        Application.Current.MainPage = new MainPage();
+                    }
+                    else
+                    {
+                        await DisplayAlert("Thông báo", "Đăng nhập thất bại. Không thể load được vì mạng yếu. hoặc chưa bật mạng vui lòng kiểm tra lại.", "OK");
+                        LoginFaild();
+                        btn_Login.IsEnabled = true;
+                    }
+                    
                 }
-                else if (strRetrun.Length == 0)
+                else if (strRetrun.Length == 1)
                 {
-                    await DisplayAlert("Thông báo", "Đăng nhập thất bại", "OK");
+                    await DisplayAlert("Thông báo", "Đăng nhập thất bại.\nTài khoản hoặc mật khẩu không chính xác", "OK");
                     LoginFaild();
                     btn_Login.IsEnabled = true;
                 }

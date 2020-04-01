@@ -46,6 +46,7 @@ namespace MobileSoLienLac.Views
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
                         break;
                     case (int)MenuItemType.Logout:
+                        App.ResetSource();
                         Application.Current.MainPage = new Login();
                         return;
 

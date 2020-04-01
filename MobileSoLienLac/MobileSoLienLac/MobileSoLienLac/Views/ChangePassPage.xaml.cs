@@ -29,11 +29,11 @@ namespace MobileSoLienLac.Views
             {
                 if (await new TaiKhoan().ChangePassword(App.IDAccount, Entry_OldPass.Text, Entry_ComplePass.Text) != -1)
                 {
-                    DisplayAlert("Thông báo", "Đổi mật khẩu thành công.", "OK");
+                    await DisplayAlert("Thông báo", "Đổi mật khẩu thành công.", "OK");
                 }
                 else
                 {
-                    DisplayAlert("Thông báo", "Đổi mật khẩu thât bại.", "OK");
+                    await DisplayAlert("Thông báo", "Đổi mật khẩu thât bại.", "OK");
                 }
             }
         }

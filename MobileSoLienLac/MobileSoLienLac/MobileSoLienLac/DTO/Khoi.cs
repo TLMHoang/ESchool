@@ -35,14 +35,11 @@ namespace MobileSoLienLac.DTO
         public async Task<DataTable> GetData()
         {
             
-            DataTable dt = await ExecuteQuery("SelectKhoi",
+            return await ExecuteQuery("SelectKhoi",
                 new SqlParameter("@ID", SqlDbType.Int) { Value = -1 });
-            
-
-            return dt;
         }
 
-        public async Task<List<Khoi>> GetData(DataTable dt)
+        public List<Khoi> GetData(DataTable dt)
         {
             List<Khoi> lst = new List<Khoi>();
             foreach (DataRow dr in dt.Rows)

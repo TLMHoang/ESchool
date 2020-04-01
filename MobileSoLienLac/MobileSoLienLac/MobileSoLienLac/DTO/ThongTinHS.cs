@@ -108,10 +108,10 @@ namespace MobileSoLienLac.DTO
 
         #region Handle With Database
 
-        public async Task<ThongTinHS> GetInforStudent(int IDHocSinh)
+        public async Task<DataTable> GetDaTa(int IDHocSinh)
         {
-            return new ThongTinHS((await new Helper().ExecuteQuery("SelectThongTinHS",
-                new SqlParameter("@ID", SqlDbType.Int) { Value = IDHocSinh })).Rows[0]);
+            return await new Helper().ExecuteQuery("SelectThongTinHS",
+                new SqlParameter("@ID", SqlDbType.Int) { Value = IDHocSinh });
         }
 
         #endregion

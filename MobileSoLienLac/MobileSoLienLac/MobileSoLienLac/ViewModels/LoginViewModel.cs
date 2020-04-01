@@ -19,28 +19,19 @@ namespace MobileSoLienLac.ViewModels
 
             if (dt.Columns.Count != 1)
             {
-                if (dt.Rows.Count == 0)
+                if (dt.Rows.Count != 0)
                 {
+                    App.IDAccount = Convert.IsDBNull(dt.Rows[0]["ID"]) ? -1 : Convert.ToInt32(dt.Rows[0]["ID"]);
                     return "";
                 }
                 else
                 {
-                    #region Set data
-                    int ID = Convert.IsDBNull(dt.Rows[0]["ID"]) ? -1 : Convert.ToInt32(dt.Rows[0]["ID"]);
-                    App.lstPHvsHs = await new LienKetPHvsHS().GetListLienKet(ID);
-                    App.IDAccount = ID;
-                    foreach (LienKetPHvsHS i in App.lstPHvsHs)
-                    {
-                        App.lstStudents.Add((await new ThongTinHS().GetInforStudent(i.IDHocSinh)));
-                    }
-
-                    #endregion
+                    
                     return "N";
                 }
             }
             else
             {
-                //int val = Convert.ToInt32();
                 return new HandleError().IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"]));
             }
         }

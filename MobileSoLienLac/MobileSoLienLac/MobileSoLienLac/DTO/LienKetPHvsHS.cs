@@ -8,7 +8,7 @@ using MobileSoLienLac.Models.SQL;
 
 namespace MobileSoLienLac.DTO
 {
-    public class LienKetPHvsHS
+    public class LienKetPHvsHS :Helper
     {
         public  int IDHocSinh { get; set; }
         public int IDTaiKhoan { get; set; }
@@ -31,12 +31,16 @@ namespace MobileSoLienLac.DTO
             IDTaiKhoan = Convert.IsDBNull(dr["IDTaiKhoan"]) ? -1 : Convert.ToInt32(dr["IDTaiKhoan"]);
         }
 
-        public async Task<List<LienKetPHvsHS>> GetListLienKet(int IDTaiKhoan)
+        public async Task<DataTable> GetData(int IDTaiKhoan)
+        {
+
+            return await ExecuteQuery("SelectLayHSQuanLy",
+                new SqlParameter("@IDTaiKhoan", SqlDbType.Int) {Value = IDTaiKhoan});
+        }
+
+        public List<LienKetPHvsHS> GetData(DataTable dt)
         {
             List<LienKetPHvsHS> lst = new List<LienKetPHvsHS>();
-
-            DataTable dt = await new Helper().ExecuteQuery("SelectLayHSQuanLy",
-                new SqlParameter("@IDTaiKhoan", SqlDbType.Int) {Value = IDTaiKhoan});
 
             foreach (DataRow dr in dt.Rows)
             {
@@ -45,5 +49,6 @@ namespace MobileSoLienLac.DTO
 
             return lst;
         }
+
     }
 }
