@@ -7,7 +7,7 @@ using Android.Provider;
 
 namespace MobileSoLienLac.Models.SQL
 {
-    public class Helper
+    public class Helper : HandleError
     {
         public string connStr = @"SERVER=125.212.218.20;Database = nxtckedu_HeThongSoLienLac; uid= nxtckedu_sa; pwd= H*P*T-1999";
         public async Task<int> ExecuteNonQuery(string ProcName, params SqlParameter[] parameters)
@@ -74,7 +74,10 @@ namespace MobileSoLienLac.Models.SQL
                 }
                 catch (Exception ex)
                 {
-                    string a = ex.Message;
+                        dt = new DataTable();
+                    dt.Columns.Add("Error");
+                    dt.Rows.Add(StringErrorToIDError(ex.Message));
+                    return dt;
                 }
                 finally
                 {

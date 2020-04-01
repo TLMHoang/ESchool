@@ -10,7 +10,7 @@ using MobileSoLienLac.Models.SQL;
 
 namespace MobileSoLienLac.DTO
 {
-    public class Khoi
+    public class Khoi : Helper
     {
         public int ID { get; set; }
         public string TenKhoi { get; set; }
@@ -32,12 +32,19 @@ namespace MobileSoLienLac.DTO
 
         #region Handle with Database
 
-        public async Task<List<Khoi>> GetList()
+        public async Task<DataTable> GetData()
+        {
+            
+            DataTable dt = await ExecuteQuery("SelectKhoi",
+                new SqlParameter("@ID", SqlDbType.Int) { Value = -1 });
+            
+
+            return dt;
+        }
+
+        public async Task<List<Khoi>> GetData(DataTable dt)
         {
             List<Khoi> lst = new List<Khoi>();
-            DataTable dt = await new Helper().ExecuteQuery("SelectKhoi",
-                new SqlParameter("@ID", SqlDbType.Int) { Value = -1 });
-
             foreach (DataRow dr in dt.Rows)
             {
                 lst.Add(new Khoi(dr));

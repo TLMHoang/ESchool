@@ -2,11 +2,13 @@
 using MobileSoLienLac.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Android.Support.V4.App;
 using MobileSoLienLac.DTO;
+using MobileSoLienLac.Models.SQL;
 using MobileSoLienLac.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,6 +18,9 @@ namespace MobileSoLienLac.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Login : ContentPage
     {
+        public Khoi valKhoi = new Khoi();
+        public Lop valLop;
+        public HandleError error;
         public Login()
         {
             InitializeComponent();
@@ -24,38 +29,55 @@ namespace MobileSoLienLac.Views
 
         public async Task LoadClass()
         {
-            App.lstKhois = await new Khoi().GetList();
+            DataTable dtk = new DataTable();
+            dtk = await valKhoi.GetData();
+            if (dtk.Columns.Count == 1)
+            {
+                Toast.MakeText(Android.App.Application.Context, "Mạng yếu vui lòng đợi", ToastLength.Long).Show();
+                dtk = new DataTable();
+                await valKhoi.GetData();
+                if (dtk.Columns.Count == 1)
+                {
+                    await DisplayAlert("Thông báo",error.IDErrorToNotify(Convert.ToInt32(dtk.Rows[0]["Error"])) , "OK");
+                    btn_Login.IsEnabled = true;
+                    return;
+                }
+            }
             App.lstLops = await new Lop().GetList();
         }
 
         private async void btn_Login_Clicked(object sender, EventArgs e)
         {
             btn_Login.IsEnabled = false;
-            await LoadClass();
-            while (App.lstKhois.Count == 0 || App.lstLops.Count == 0)
-            {
-            }
             int val = new ModelLogin().CheckEntryNull(Entry_Username.Text, Entry_Password.Text);
             if (val == 0)
             {
-                if ((await new LoginViewModel().CheckLogin(Entry_Username.Text, Entry_Password.Text)))
+                string strRetrun = (await new LoginViewModel().CheckLogin(Entry_Username.Text, Entry_Password.Text));
+                if (strRetrun.Length == 0)
                 {
+                    await LoadClass();
                     await DisplayAlert("Thông báo", "Đăng nhập thành công", "Ok");
 
-                    //App.lstStudents = new List<ThongTinHS>()
+                    //while (App.lstKhois.Count == 0 || App.lstLops.Count == 0)
                     //{
-                    //    new ThongTinHS(1,"Trần Lê Minh Hoàng",DateTime.Now, 1,"","","",1,"17DTHB2",1,0,0,0),
-                    //    new ThongTinHS(2,"Trần Xuân Trường",DateTime.Now, 1,"","","",1,"17DTHB2",1,0,0,0),
-                    //    new ThongTinHS(3,"Vũ Hoàng Phong",DateTime.Now, 1,"","","",1,"17DTHA3",1,0,0,0)
-                    //};
+                    //    if (expr)
+                    //    {
+
+                    //    }
+                    //}
                     App.StudentSeclect = App.lstStudents.FirstOrDefault();
 
                     Application.Current.MainPage = new MainPage();
                 }
-                else
+                else if (strRetrun.Length == 0)
                 {
                     await DisplayAlert("Thông báo", "Đăng nhập thất bại", "OK");
                     LoginFaild();
+                    btn_Login.IsEnabled = true;
+                }
+                else
+                {
+                    await DisplayAlert("Thông báo", strRetrun, "OK");
                     btn_Login.IsEnabled = true;
                 }
             }
@@ -64,21 +86,21 @@ namespace MobileSoLienLac.Views
                 switch (val)
                 {
                     case 1:
-                    {
-                        await DisplayAlert("Thông báo", "Vui Lòng nhập TÀI KHOẢN", "OK");
-                        Entry_Username.Focus();
-                        break;
-                    }
+                        {
+                            await DisplayAlert("Thông báo", "Vui Lòng nhập TÀI KHOẢN", "OK");
+                            Entry_Username.Focus();
+                            break;
+                        }
                     case 2:
-                    {
-                        await DisplayAlert("Thông báo", "Vui Lòng nhập MẬT KHẨU", "OK");
-                        Entry_Password.Focus();
-                        break;
-                    }
+                        {
+                            await DisplayAlert("Thông báo", "Vui Lòng nhập MẬT KHẨU", "OK");
+                            Entry_Password.Focus();
+                            break;
+                        }
                     default:
-                    {
-                        break;
-                    }
+                        {
+                            break;
+                        }
                 }
                 btn_Login.IsEnabled = true;
             }
