@@ -26,6 +26,11 @@ namespace MobileSoLienLac.Models.SQL
                 return -45;
             }
 
+            if (strError.Contains("Login failed for user"))
+            {
+                return -50;
+            }
+
             return -1000;
         }
 
@@ -38,8 +43,8 @@ namespace MobileSoLienLac.Models.SQL
                 case -35:
                     return "Không thê kết nối tới máy chủ kiểm tra lại mạng.";
                 case -45:
-                    return
-                        "Có thể hệ thống đang bảo tri hoặc cập nhập. Kiểm tra bản cập nhập nếu không có báo với USteam để kiểm tra lại";
+                case -50:
+                    return "Có thể hệ thống đang bảo tri hoặc cập nhập. Kiểm tra bản cập nhập nếu không có báo với USteam để kiểm tra lại";
                 default:
                     return "Lỗi không cụ thể.";
             }

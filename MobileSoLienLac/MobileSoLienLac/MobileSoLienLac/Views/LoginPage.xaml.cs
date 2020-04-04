@@ -18,83 +18,170 @@ namespace MobileSoLienLac.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Login : ContentPage
     {
-        public Khoi valKhoi = new Khoi();
-        public Lop valLop = new Lop();
-        public LienKetPHvsHS valLK = new LienKetPHvsHS();
+        
         public ThongTinHS valHS = new ThongTinHS();
-        public HandleError error;
+        public HandleError error = new HandleError();
         public Login()
         {
             InitializeComponent();
-            //img_Logo.Source = ImageSource.FromFile("sourcelogo.png");
+        }
+
+        public async Task<bool> LoadGrade()
+        {
+            Khoi val = new Khoi();
+            DataTable dt = await val.GetData();
+            if (dt.Columns.Count == 1)
+            {
+                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
+                btn_Login.IsEnabled = true;
+                App.ResetSource();
+                return false;
+            }
+            else
+            {
+                App.lstKhois = val.GetData(dt);
+                return true;
+            }
+        }
+
+        public async Task<bool> LoadClass()
+        {
+            Lop val = new Lop();
+            DataTable dt = await val.GetData();
+            if (dt.Columns.Count == 1)
+            {
+                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
+                btn_Login.IsEnabled = true;
+                App.ResetSource();
+                return false;
+            }
+            else
+            {
+                App.lstLops = val.GetData(dt);
+                return true;
+            }
+        }
+        //dang bug
+        public async Task<bool> LoadLink()
+        {
+            LienKetPHvsHS val = new LienKetPHvsHS();
+            DataTable dt = await val.GetData(App.IDAccount);
+            if (dt.Columns.Count == 1)
+            {
+                int IDError = Convert.ToInt32(dt.Rows[0]["Error"]);
+                string mess = error.IDErrorToNotify(IDError);
+                await DisplayAlert("Thông báo", mess, "OK");
+                btn_Login.IsEnabled = true;
+                App.ResetSource();
+                return false;
+            }
+            else
+            {
+                App.lstPHvsHs = val.GetData(dt);
+                return true;
+            }
+        }
+
+        public async Task<bool> LoadConduct()
+        {
+            LoaiHanhKiem val = new LoaiHanhKiem();
+            DataTable dt = await val.GetData();
+            if (dt.Columns.Count == 1)
+            {
+                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
+                btn_Login.IsEnabled = true;
+                App.ResetSource();
+                return false;
+            }
+            else
+            {
+                App.lstLoaiHanhKiems = val.GetData(dt);
+                return true;
+            }
+        }
+
+        public async Task<bool> LoadSpeciesStudent()
+        {
+            LoaiHocSinh val = new LoaiHocSinh();
+            DataTable dt = await val.GetData();
+            if (dt.Columns.Count == 1)
+            {
+                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
+                btn_Login.IsEnabled = true;
+                App.ResetSource();
+                return false;
+            }
+            else
+            {
+                App.lstLoaiHocSinhs = val.GetData(dt);
+                return true;
+            }
+        }
+
+        public async Task<bool> LoadSpeciesPoint()
+        {
+            LoaiDiem val = new LoaiDiem();
+            DataTable dt = await val.GetData();
+            if (dt.Columns.Count == 1)
+            {
+                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
+                btn_Login.IsEnabled = true;
+                App.ResetSource();
+                return false;
+            }
+            else
+            {
+                App.lstLoaiDiems = val.GetData(dt);
+                return true;
+            }
+        }
+        public async Task<bool> LoadSpeciesNotify()
+        {
+            LoaiThongBao val = new LoaiThongBao();
+            DataTable dt = await val.GetData();
+            if (dt.Columns.Count == 1)
+            {
+                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
+                btn_Login.IsEnabled = true;
+                App.ResetSource();
+                return false;
+            }
+            else
+            {
+                App.lstLoaiThongBaos = val.GetData(dt);
+                return true;
+            }
         }
 
         public async Task<bool> LoadDataInDatabase()
         {
-            #region Load grade
+            if (!(await LoadGrade())) return false;
+            if (!(await LoadClass())) return false;
+            if (!(await LoadLink())) return false;
+            if (!(await LoadConduct())) return false;
+            if (!(await LoadSpeciesStudent())) return false;
+            if (!(await LoadSpeciesPoint())) return false;
+            if (!(await LoadSpeciesNotify())) return false;
 
-            DataTable dtk = await valKhoi.GetData();
-            if (dtk.Columns.Count == 1)
-            {
-                await DisplayAlert("Thông báo",error.IDErrorToNotify(Convert.ToInt32(dtk.Rows[0]["Error"])) , "OK");
-                btn_Login.IsEnabled = true;
-                App.ResetSource();
-                return false;
-            }
-            else
-            {
-                App.lstKhois = valKhoi.GetData(dtk);
-            }
-
-            #endregion
-
-            #region Load Class
-
-            DataTable dtl = await valLop.GetData();
-            if (dtk.Columns.Count == 1)
-            {
-                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dtl.Rows[0]["Error"])), "OK");
-                btn_Login.IsEnabled = true;
-                App.ResetSource();
-                return false;
-            }
-            else
-            {
-                App.lstLops =  valLop.GetData(dtl);
-            }
-
-            #endregion
-
-            #region get link SP vs St
-
-            DataTable dtlk = await valLK.GetData(App.IDAccount);
-            if (dtk.Columns.Count == 1)
-            {
-                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dtlk.Rows[0]["Error"])), "OK");
-                btn_Login.IsEnabled = true;
-                App.ResetSource();
-                return false;
-            }
-            else
-            {
-                App.lstPHvsHs = valLK.GetData(dtlk);
-            }
-
-            #endregion
             foreach (LienKetPHvsHS i in App.lstPHvsHs)
             {
-               DataTable dtS = await valHS.GetDaTa(i.IDHocSinh);
-               if (dtS.Columns.Count == 1)
-               {
-                   await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dtlk.Rows[0]["Error"])), "OK");
-                   btn_Login.IsEnabled = true;
-                   App.ResetSource();
-                   return false;
+                #region Load Strudent 
+
+                DataTable dt = await valHS.GetDaTa(i.IDHocSinh);
+                if (dt.Columns.Count == 1)
+                {
+                    
+                    await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
+                    btn_Login.IsEnabled = true;
+                    App.ResetSource();
+                    return false;
                 }
-               else
-               {
-                   App.lstStudents.Add(new ThongTinHS(dtS.Rows[0]));
-               }
+                else
+                {
+                    App.lstStudents.Add(new ThongTinHS(dt.Rows[0]));
+                }
+
+                #endregion
             }
 
             App.StudentSeclect = App.lstStudents.FirstOrDefault();

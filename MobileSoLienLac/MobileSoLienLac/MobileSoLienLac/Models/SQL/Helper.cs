@@ -9,7 +9,10 @@ namespace MobileSoLienLac.Models.SQL
 {
     public class Helper : HandleError
     {
+        // connect string to db main
         public string connStr = @"SERVER=125.212.218.20;Database = nxtckedu_HeThongSoLienLac; uid= nxtckedu_sa; pwd= H*P*T-1999";
+        //Connect String to DB backup
+        //public string connStr = @"SERVER=125.212.218.20;Database = nxtckedu_Backup; uid= nxtckedu_Backup; pwd= H*P*T-1999";
         public async Task<int> ExecuteNonQuery(string ProcName, params SqlParameter[] parameters)
         {
             using (SqlConnection con = new SqlConnection(connStr))

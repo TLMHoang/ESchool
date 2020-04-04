@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -61,21 +62,23 @@ namespace MobileSoLienLac.Views
             
         }
 
-        private void BtnListStudent_OnClicked(object sender, EventArgs e)
+        private async void BtnListStudent_OnClicked(object sender, EventArgs e)
         {
-            
+            ListStudentInClassViewModel _value = await new ListStudentInClassViewModel().GetData(App.StudentSeclect.IDLop);
+            if (_value.Message.Length == 0)
+            {
+                _value.Message = "Danh sách lớp " + App.StudentSeclect.TenLop;
+                await Navigation.PushAsync(new ListStudentInClassPage(_value));
+            }
+            else
+            {
+                await DisplayAlert("Thông báo", _value.Message, "OK");
+            }
         }
 
         private void BtnSchedule_OnClicked(object sender, EventArgs e)
         {
             
-        }
-
-        private async void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
-        {
-            //Frame frm = (Frame) sender;
-            //frm.BackgroundColor = 
-            await DisplayAlert("Test", "Tapped in Frame", "OK");
         }
     }
 }

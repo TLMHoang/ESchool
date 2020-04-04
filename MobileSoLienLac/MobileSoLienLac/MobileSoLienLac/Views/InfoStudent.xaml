@@ -9,47 +9,67 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Image Source="https://png.pngtree.com/png-clipart/20190604/original/pngtree-naughty-monkey-png-image_856184.jpg"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    <!-- Tên học sinh-->
                     <Label Grid.Row="0" Grid.Column="0"
                            Text="Tên:" FontSize="Large"/>
                     <Label Text="{Binding Ten}" FontSize="Large"
                            Grid.Row="0" Grid.Column="1"/>
-                    <Label Text="Giới tính:" FontSize="Large"
+                    <!-- Lớp-->
+                    <Label Text="Lớp :" FontSize="Large"
                            Grid.Row="1" Grid.Column="0"/>
+                    <Label Text="{Binding TenLop}" FontSize="Large"
+                           Grid.Row="1" Grid.Column="1"/>
+                    <!-- Giới tính-->
+                    <Label Text="Giới tính:" FontSize="Large"
+                           Grid.Row="2" Grid.Column="0"/>
                     <Label Text="{Binding GioiTinh, Converter={StaticResource ConvertByteToSex}}"
                            FontSize="Large"
-                           Grid.Row="1" Grid.Column="1"/>
-                    <Label Text="Lớp :" FontSize="Large"
-                           Grid.Row="2" Grid.Column="0"/>
-                    <Label Text="{Binding TenLop}" FontSize="Large"
                            Grid.Row="2" Grid.Column="1"/>
+                    <!-- Ngày sinh-->
                     <Label Text="Ngày sinh:"  FontSize="Large"
                            Grid.Row="3" Grid.Column="0"/>
                     <Label Text="{Binding NgaySinh , Converter={StaticResource ConvertDateTimeToDate}}" 
                            FontSize="Large"
                            Grid.Row="3" Grid.Column="1"/>
+                    <!-- Noi ở học sinh-->
+                    <Label Text="Nơi Sinh:" FontSize="Large"
+                           Grid.Row="4" Grid.Column="0"/>
+                    <Label Text="{Binding NoiSinh}" FontSize="Large"
+                           Grid.Row="4" Grid.Column="1"/>
+                    <!--Loại học sinh-->
+                    <Label Text="Loại HS:" FontSize="Large"
+                           Grid.Row="5" Grid.Column="0"/>
+                    <Label Text="{Binding IDLoaiHocSinh, Converter={StaticResource ConvetIntToLoaiHocSinh}}" FontSize="Large"
+                           Grid.Row="5" Grid.Column="1"/>
+                    <!--Dân tộc-->
+                    <Label Text="Dân tộc:" FontSize="Large"
+                           Grid.Row="6" Grid.Column="0"/>
+                    <Label Text="{Binding DanToc}" FontSize="Large"
+                           Grid.Row="6" Grid.Column="1"/>
+                    <!--Dân tộc-->
+                    <Label Text="Tôn giáo:" FontSize="Large"
+                           Grid.Row="7" Grid.Column="0"/>
+                    <Label Text="{Binding TonGiao}" FontSize="Large"
+                           Grid.Row="7" Grid.Column="1"/>
                 </Grid>
             </StackLayout>
         </ScrollView>
         <!--<StackLayout>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Giới tính:" FontSize="Large"/>
-                <Label Text="{Binding GioiTinh, Converter={StaticResource ConvertByteToSex}}" FontSize="Large"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Nơi Sinh:" FontSize="Large"/>
-                <Label Text="{Binding NoiSinh}" FontSize="Large"/>
-            </StackLayout>
+
         </StackLayout>-->
     </ContentPage.Content>
 </ContentPage>

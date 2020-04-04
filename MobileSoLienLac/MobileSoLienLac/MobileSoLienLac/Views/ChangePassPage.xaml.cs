@@ -1,10 +1,12 @@
 ﻿using Android.Widget;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MobileSoLienLac.DTO;
+using MobileSoLienLac.Models.SQL;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Switch = Xamarin.Forms.Switch;
@@ -27,13 +29,18 @@ namespace MobileSoLienLac.Views
         {
             if (Check())
             {
-                if (await new TaiKhoan().ChangePassword(App.IDAccount, Entry_OldPass.Text, Entry_ComplePass.Text) != -1)
+                int result = await new TaiKhoan().ChangePassword(App.IDAccount, Entry_OldPass.Text, Entry_ComplePass.Text);
+                if (result == 1)
                 {
                     await DisplayAlert("Thông báo", "Đổi mật khẩu thành công.", "OK");
                 }
-                else
+                else if (result == -1)
                 {
                     await DisplayAlert("Thông báo", "Đổi mật khẩu thât bại.", "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Thông báo", new HandleError().IDErrorToNotify(result), "OK");
                 }
             }
         }

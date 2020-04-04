@@ -9,6 +9,9 @@ using Xamarin.Forms.Xaml;
 using MobileSoLienLac.Models;
 using Android.Widget;
 using MobileSoLienLac.DTO;
+using TableDependency.SqlClient;
+using TableDependency.SqlClient.Base.EventArgs;
+using TableDependency.SqlClient.Base.Enums;
 
 namespace MobileSoLienLac.Views
 {
@@ -25,6 +28,33 @@ namespace MobileSoLienLac.Views
             MasterBehavior = MasterBehavior.Popover;
 
             MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
+        }
+
+        public void WaitNotify()
+        {
+            string connStr = @"SERVER=125.212.218.20; Initial Catalog=nxtckedu_HeThongSoLienLac; Integrated Security=false; uid= nxtckedu_sa; pwd= H*P*T-1999";
+            using (var result = new SqlTableDependency<LoaiHocSinh>(connStr, "Function"))
+            {
+                result.OnChanged += Result_OnChanged;
+                result.OnError += Result_OnError;
+
+                result.Start();
+            }
+        }
+
+        private void Result_OnError(object sender, ErrorEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Result_OnChanged(object sender, RecordChangedEventArgs<LoaiHocSinh> e)
+        {
+            if (e.ChangeType != ChangeType.None)
+            {
+                var Value = e.Entity;
+                string val = e.ChangeType.ToString() + "\n";
+                DisplayAlert("Thông báo", val + Value.TenLoai, "OK");
+            }
         }
 
         public async Task NavigateFromMenu(int id)
