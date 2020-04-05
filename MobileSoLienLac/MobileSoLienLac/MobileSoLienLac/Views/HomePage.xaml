@@ -15,7 +15,8 @@
                 Grid.Row="0" Grid.Column="1"
                 Title="Chọn học sinh"
                 FontSize="Large"
-                HorizontalOptions="CenterAndExpand"/>
+                WidthRequest="{Binding Source={x:Reference BrowseItemsPage}, Path=Width}"
+                HorizontalOptions="Center"/>
         <ScrollView>
             <Grid x:Name="MapMain" 
                   Margin="0"

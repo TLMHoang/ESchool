@@ -45,7 +45,14 @@ namespace MobileSoLienLac.Views.Notify
                         else
                         {
                             ThongBaoHS tbt = ValHs.GetData(dt.Rows[0]);
-                            DisplayAlert((string)((NotifyViewModel)e.SelectedItem).TenThongBao, tbt.NoiDung, "OK");
+                            if (tbt.NoiDung.Length >= 1000)
+                            {
+                                await Navigation.PushAsync(new ShowNewPage((string)((NotifyViewModel)e.SelectedItem).TenThongBao, tbt.Ngay.ToString("dd-MM-yyyy"), tbt.NoiDung));
+                            }
+                            else
+                            {
+                                await DisplayAlert((string)((NotifyViewModel)e.SelectedItem).TenThongBao, tbt.NoiDung, "OK");
+                            }
 
                         }
                     }

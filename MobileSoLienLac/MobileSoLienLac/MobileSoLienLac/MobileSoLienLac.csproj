@@ -22,19 +22,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\ChangePassPage.xaml">
+    <EmbeddedResource Update="Views\Class\ListTeacherPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ChooseStudent.xaml">
+    <EmbeddedResource Update="Views\User\ChangePassPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\InfoStudent.xaml">
+    <EmbeddedResource Update="Views\Student\InfoStudent.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ListStudentInClassPage.xaml">
+    <EmbeddedResource Update="Views\Class\ListStudentInClassPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\LoginPage.xaml">
+    <EmbeddedResource Update="Views\User\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Notify\NClassPage.xaml">
@@ -47,6 +47,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Notify\NStudentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Notify\ShowNewPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -65,13 +68,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\ChangePassPage.xaml.cs">
+    <Compile Update="Views\User\ChangePassPage.xaml.cs">
       <DependentUpon>ChangePassPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\LoginPage.xaml.cs">
+    <Compile Update="Views\User\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>

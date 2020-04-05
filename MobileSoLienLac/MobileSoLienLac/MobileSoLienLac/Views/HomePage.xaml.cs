@@ -12,8 +12,10 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using MobileSoLienLac.Models;
+using MobileSoLienLac.Models.SQL;
 using MobileSoLienLac.Views;
 using MobileSoLienLac.ViewModels;
+using MobileSoLienLac.Views.Class;
 
 namespace MobileSoLienLac.Views
 {
@@ -47,9 +49,19 @@ namespace MobileSoLienLac.Views
             await Navigation.PushAsync(new NotifyPage());
         }
 
-        private void BtnListTeacher_OnClicked(object sender, EventArgs e)
+        private async void BtnListTeacher_OnClicked(object sender, EventArgs e)
         {
-            
+            ModelListTeacher val = new ModelListTeacher();
+            DataTable dt = await val.GetData(App.StudentSeclect.IDLop);
+
+            if (dt.Columns.Count == 1)
+            {
+                await DisplayAlert("Thông báo", new HandleError().IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
+            }
+            else
+            {
+                await Navigation.PushAsync(new ListTeacherPage(val.GetData(dt), "Giáo viên lớp " + App.StudentSeclect.TenLop));
+            }
         }
 
         private async void BtnStudent_OnClicked(object sender, EventArgs e)
