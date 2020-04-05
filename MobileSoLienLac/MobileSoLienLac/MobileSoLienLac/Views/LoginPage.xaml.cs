@@ -135,23 +135,6 @@ namespace MobileSoLienLac.Views
                 return true;
             }
         }
-        public async Task<bool> LoadSpeciesNotify()
-        {
-            LoaiThongBao val = new LoaiThongBao();
-            DataTable dt = await val.GetData();
-            if (dt.Columns.Count == 1)
-            {
-                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
-                btn_Login.IsEnabled = true;
-                App.ResetSource();
-                return false;
-            }
-            else
-            {
-                App.lstLoaiThongBaos = val.GetData(dt);
-                return true;
-            }
-        }
 
         public async Task<bool> LoadDataInDatabase()
         {
@@ -161,7 +144,6 @@ namespace MobileSoLienLac.Views
             if (!(await LoadConduct())) return false;
             if (!(await LoadSpeciesStudent())) return false;
             if (!(await LoadSpeciesPoint())) return false;
-            if (!(await LoadSpeciesNotify())) return false;
 
             foreach (LienKetPHvsHS i in App.lstPHvsHs)
             {

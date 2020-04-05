@@ -8,7 +8,7 @@ using MobileSoLienLac.Models.SQL;
 
 namespace MobileSoLienLac.DTO
 {
-    class ThongBaoHS : Helper
+    public class ThongBaoHS : Helper
     {
         public int ID { get; set; }
         public int IDHocSinh { get; set; }

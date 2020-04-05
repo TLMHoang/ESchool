@@ -12,15 +12,15 @@ namespace MobileSoLienLac.ViewModels
     public class NotifyViewModel
     {
         public int ID { get; set; }
-        public int IDLoaiThongBao { get; set; }
+        public string TenThongBao { get; set; }
         public DateTime Ngay { get; set; }
 
 
         public NotifyViewModel() { }
-        public NotifyViewModel(int iD, int idLoaiThongBao, DateTime ngay)
+        public NotifyViewModel(int iD, string tenThongBao, DateTime ngay)
         {
             ID = iD;
-            IDLoaiThongBao = idLoaiThongBao;
+            TenThongBao = tenThongBao;
             Ngay = ngay;
         }
 
@@ -33,6 +33,7 @@ namespace MobileSoLienLac.ViewModels
             }
             else
             {
+                App.LstThongBaoTruongs = new List<NotifyModel>();
                 App.LstThongBaoTruongs = new NotifyModel().GetDataSchool(dt);
                 return "";
             }
@@ -40,28 +41,30 @@ namespace MobileSoLienLac.ViewModels
 
         public async Task<string> NotifyClass()
         {
-            DataTable dt = await new NotifyModel().GetDataClass();
+            DataTable dt = await new NotifyModel().GetDataClass(App.StudentSeclect.IDLop);
             if (dt.Columns.Count == 1)
             {
                 return new HandleError().IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"]));
             }
             else
             {
-                App.LstThongBaoTruongs = new NotifyModel().GetDataClass(dt);
+                App.LstThongBaoLops = new List<NotifyModel>();
+                App.LstThongBaoLops = new NotifyModel().GetDataClass(dt);
                 return "";
             }
         }
 
         public async Task<string> NotifyStudent()
         {
-            DataTable dt = await new NotifyModel().GetDataStudent();
+            DataTable dt = await new NotifyModel().GetDataStudent(App.StudentSeclect.ID);
             if (dt.Columns.Count == 1)
             {
                 return new HandleError().IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"]));
             }
             else
             {
-                App.LstThongBaoTruongs = new NotifyModel().GetDataStudent(dt);
+                App.LstThongBaoHSs = new List<NotifyModel>();
+                App.LstThongBaoHSs = new NotifyModel().GetDataStudent(dt);
                 return "";
             }
         }

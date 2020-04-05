@@ -17,7 +17,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout>
-                                <Label x:Name="lvText" Text="{Binding IDLoaiThongBao, Converter={StaticResource ConvertIntToNotify}}" FontSize="Large"/>
+                                <Label x:Name="lvText" Text="{Binding TenThongBao}" FontSize="Large"/>
                                 <Label Text="{Binding Ngay, Converter={StaticResource ConvertDateTimeToDate}}"/>
                             </StackLayout>
                         </ViewCell>

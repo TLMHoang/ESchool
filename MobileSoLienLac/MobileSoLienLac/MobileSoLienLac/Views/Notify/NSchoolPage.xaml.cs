@@ -19,14 +19,14 @@ namespace MobileSoLienLac.Views.Notify
 
         public NSchoolPage()
         {
-            NotifySchool();
             InitializeComponent();
+            NotifySchool();
             if (App.LstThongBaoTruongs.Count != 0)
             {
                 List<NotifyViewModel> lst = new List<NotifyViewModel>();
                 foreach (var i in App.LstThongBaoTruongs)
                 {
-                    lst.Add(new NotifyViewModel(i.ID,i.IDLoaiThongBao,i.Ngay));
+                    lst.Add(new NotifyViewModel(i.ID,i.TenThongBao,i.Ngay));
                 }
 
                 lst = lst.OrderByDescending(p => p.ID).ToList();
@@ -35,33 +35,40 @@ namespace MobileSoLienLac.Views.Notify
                 lvLstNotify.ItemSelected += async (sender, e) =>
                 {
 
-                    DataTable dt = await valThongBaoTruong.GetContent((int) ((NotifyViewModel) e.SelectedItem).ID);
-                    if (dt.Columns.Count == 1)
+                    if (lvLstNotify.SelectedItem != null)
                     {
-                        await DisplayAlert("Thông báo",
-                            new HandleError().IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
-                    }
-                    else
-                    {
-                        ThongBaoTruong tbt = valThongBaoTruong.GetData(dt.Rows[0]);
-                        string strTitle = App.lstLoaiThongBaos.FirstOrDefault(p => p.ID == tbt.IDLoaiThongBao).TenThongBao;
-                        DisplayAlert(strTitle, tbt.NoiDung, "OK");
+                        DataTable dt = await valThongBaoTruong.GetContent((int) ((NotifyViewModel) e.SelectedItem).ID);
+                        if (dt.Columns.Count == 1)
+                        {
+                            await DisplayAlert("Thông báo",
+                                new HandleError().IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
+                        }
+                        else
+                        {
+                            ThongBaoTruong tbt = valThongBaoTruong.GetData(dt.Rows[0]);
+                            await DisplayAlert((string)((NotifyViewModel)e.SelectedItem).TenThongBao, tbt.NoiDung, "OK");
+                        
 
+                        }
                     }
+                    lvLstNotify.SelectionMode = ListViewSelectionMode.None;
+                    lvLstNotify.SelectionMode = ListViewSelectionMode.Single;
                 };
             }
             else
             {
                 StackLayoutNS.Children.Remove(lvLstNotify);
             }
-
-
-
         }
 
         public async void NotifySchool()
         {
             string Message = await new NotifyViewModel().NotifySchool();
+            if (Message != "")
+            {
+                lblNotify.Text = "Vui lòng thử lại.";
+                await DisplayAlert("Thông báo", Message, "OK");
+            }
         }
     }
 }

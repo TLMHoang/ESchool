@@ -21,7 +21,6 @@ namespace MobileSoLienLac
         public static List<LoaiDiem> lstLoaiDiems = new List<LoaiDiem>();
         public static List<LoaiHanhKiem> lstLoaiHanhKiems = new List<LoaiHanhKiem>();
         public static List<LoaiHocSinh> lstLoaiHocSinhs = new List<LoaiHocSinh>();
-        public static List<LoaiThongBao> lstLoaiThongBaos = new List<LoaiThongBao>();
 
         #region Notify
 
@@ -53,7 +52,6 @@ namespace MobileSoLienLac
             lstLoaiDiems = new List<LoaiDiem>();
             lstLoaiHanhKiems = new List<LoaiHanhKiem>();
             lstLoaiHocSinhs = new List<LoaiHocSinh>();
-            lstLoaiThongBaos = new List<LoaiThongBao>();
 
             LstThongBaoTruongs = new List<NotifyModel>();
             LstThongBaoLops = new List<NotifyModel>();

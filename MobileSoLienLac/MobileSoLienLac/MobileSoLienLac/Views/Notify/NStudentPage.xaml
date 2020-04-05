@@ -6,10 +6,24 @@
              mc:Ignorable="d"
              x:Class="MobileSoLienLac.Views.Notify.NStudentPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout x:Name="StackLayoutNS">
+            <Label x:Name="lblNotify"
+                   Text="Chưa có thông báo mới"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="Large"/>
+            <ListView x:Name="lvLstNotify" RowHeight="60">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label x:Name="lvText" Text="{Binding TenThongBao}" FontSize="Large"/>
+                                <Label Text="{Binding Ngay, Converter={StaticResource ConvertDateTimeToDate}}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

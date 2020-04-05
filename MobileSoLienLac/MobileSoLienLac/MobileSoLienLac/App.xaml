@@ -21,7 +21,6 @@
             <converter:ConvertByteToSex x:Key="ConvertByteToSex"/>
             <converter:ConvetIntToLoaiHocSinh x:Key="ConvetIntToLoaiHocSinh"/>
             <converter:ConvertIntToLoaiHanhKiem x:Key="ConvertIntToLoaiHanhKiem"/>
-            <converter:ConvertIntToNotify x:Key="ConvertIntToNotify"/>
         </ResourceDictionary>
     </Application.Resources>
     
