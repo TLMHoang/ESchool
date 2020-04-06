@@ -22,8 +22,10 @@ namespace MobileSoLienLac.DTO
         public string NoiSinh { get; set; }
         public string DanToc { get; set; }
         public string TonGiao { get; set; }
+        public int IDKhoi { get; set; }
         public int IDLop { get; set; }
         public string TenLop { get; set; }
+        public string TenLoai { get; set; }
         public int IDLoaiHocSinh { get; set; }
         public int HKI { get; set; }
         public int HKII { get; set; }
@@ -38,15 +40,17 @@ namespace MobileSoLienLac.DTO
             NoiSinh = "";
             DanToc = "";
             TonGiao = "";
+            IDKhoi = -1;
             IDLop = -1;
             TenLop = "";
+            TenLoai = "";
             IDLoaiHocSinh = -1;
             HKI = -1;
             HKII = -1;
             CaNam = -1;
         }
 
-        public ThongTinHS(int iD, string ten, DateTime ngaySinh, byte gioiTinh, string noiSinh, string danToc, string tonGiao, int iDLop, string tenLop, int iDLoaiHocSinh, int hKI, int hKII, int caNam)
+        public ThongTinHS(int iD, string ten, DateTime ngaySinh, byte gioiTinh, string noiSinh, string danToc, string tonGiao, int idKhoi, int iDLop, string tenLop, string tenLoai, int iDLoaiHocSinh, int hKI, int hKII, int caNam)
         {
             ID = iD;
             Ten = ten;
@@ -55,8 +59,10 @@ namespace MobileSoLienLac.DTO
             NoiSinh = noiSinh;
             DanToc = danToc;
             TonGiao = tonGiao;
+            IDKhoi = idKhoi;
             IDLop = iDLop;
             TenLop = tenLop;
+            TenLoai = tenLoai;
             IDLoaiHocSinh = iDLoaiHocSinh;
             HKI = hKI;
             HKII = hKI;
@@ -72,8 +78,10 @@ namespace MobileSoLienLac.DTO
             NoiSinh = dr["NoiSinh"].ToString();
             DanToc = dr["DanToc"].ToString();
             TonGiao = dr["TonGiao"].ToString();
+            IDKhoi = Convert.IsDBNull(dr["IDKhoi"]) ? -1 : Convert.ToInt32(dr["IDKhoi"]);
             IDLop = Convert.IsDBNull(dr["IDLop"]) ? -1 : Convert.ToInt32(dr["IDLop"]);
-            TenLop = GetClass(IDLop);
+            TenLop = dr["TenKhoi"].ToString() + dr["TenLop"].ToString();
+            TenLoai = dr["TenLoai"].ToString();
             IDLoaiHocSinh = Convert.IsDBNull(dr["IDLoaiHocSinh"]) ? -1 : Convert.ToInt32(dr["IDLop"]);
             HKI = Convert.IsDBNull(dr["HKI"]) ? -1 : Convert.ToInt32(dr["HKI"]);
             HKII = Convert.IsDBNull(dr["HKII"]) ? -1 : Convert.ToInt32(dr["HKII"]);
@@ -110,7 +118,7 @@ namespace MobileSoLienLac.DTO
 
         public async Task<DataTable> GetDaTa(int IDHocSinh)
         {
-            return await new Helper().ExecuteQuery("SelectThongTinHS",
+            return await new Helper().ExecuteQuery("SelectThongTinHSv2",
                 new SqlParameter("@ID", SqlDbType.Int) { Value = IDHocSinh });
         }
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using MobileSoLienLac.Models.SQL;
 
 namespace MobileSoLienLac.DTO
-{
+{//có thể xóa
     public class Khoi : Helper
     {
         public int ID { get; set; }

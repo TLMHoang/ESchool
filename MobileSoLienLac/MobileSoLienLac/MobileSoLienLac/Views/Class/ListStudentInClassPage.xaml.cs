@@ -26,7 +26,7 @@ namespace MobileSoLienLac.Views
         {
             InitializeComponent();
             this.Title = _value.Message;
-            _value.ListStudents = _value.ListStudents.OrderBy(p => p.Ten).ToList();
+            _value.ListStudents.Sort(new SortListStudent());
 
             ListViewListStudent.ItemsSource = _value.ListStudents;
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MobileSoLienLac.Models.SQL;
 
 namespace MobileSoLienLac.DTO
-{
+{//co thể xóa
     public class Lop : Helper
     {
         public int ID { get; set; }

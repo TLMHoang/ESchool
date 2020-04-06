@@ -16,6 +16,7 @@ using MobileSoLienLac.Models.SQL;
 using MobileSoLienLac.Views;
 using MobileSoLienLac.ViewModels;
 using MobileSoLienLac.Views.Class;
+using MobileSoLienLac.Views.Student.Fee;
 
 namespace MobileSoLienLac.Views
 {
@@ -69,9 +70,9 @@ namespace MobileSoLienLac.Views
             await Navigation.PushAsync(new InfoStudent());
         }
 
-        private void BtnFee_OnClicked(object sender, EventArgs e)
+        private async void BtnFee_OnClicked(object sender, EventArgs e)
         {
-            
+            await Navigation.PushAsync(new ListFeeByMonth());
         }
 
         private async void BtnListStudent_OnClicked(object sender, EventArgs e)

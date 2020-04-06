@@ -53,7 +53,7 @@
                     <!--Loại học sinh-->
                     <Label Text="Loại HS:" FontSize="Large"
                            Grid.Row="5" Grid.Column="0"/>
-                    <Label Text="{Binding IDLoaiHocSinh, Converter={StaticResource ConvetIntToLoaiHocSinh}}" FontSize="Large"
+                    <Label Text="{Binding TenLoai}" FontSize="Large"
                            Grid.Row="5" Grid.Column="1"/>
                     <!--Dân tộc-->
                     <Label Text="Dân tộc:" FontSize="Large"

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobileSoLienLac.Views.Student.Fee.ListFeeByMonth">
+    <ContentPage.Content>
+        <StackLayout>
+            <Picker x:Name="PickerMonth"
+                    Title="Chọn tháng"
+                    HorizontalOptions="CenterAndExpand"/>
+            <Grid HorizontalOptions="Fill">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"
+                       Text="Tiền học: "/>
+                <Label Grid.Row="1" Grid.Column="0"
+                       Text="Tiền điện: "/>
+                <Label Grid.Row="2" Grid.Column="0"
+                       Text="Tiền vệ sinh: "/>
+                <Label Grid.Row="3" Grid.Column="0"
+                       Text="Tiền Nước: "/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
