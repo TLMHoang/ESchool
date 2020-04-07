@@ -32,23 +32,23 @@ namespace MobileSoLienLac.DTO
 
         #region Handle with Database
 
-        public async Task<DataTable> GetData()
-        {
+        //public async Task<DataTable> GetData()
+        //{
             
-            return await ExecuteQuery("SelectKhoi",
-                new SqlParameter("@ID", SqlDbType.Int) { Value = -1 });
-        }
+        //    return await ExecuteQuery("SelectKhoi",
+        //        new SqlParameter("@ID", SqlDbType.Int) { Value = -1 });
+        //}
 
-        public List<Khoi> GetData(DataTable dt)
-        {
-            List<Khoi> lst = new List<Khoi>();
-            foreach (DataRow dr in dt.Rows)
-            {
-                lst.Add(new Khoi(dr));
-            }
+        //public List<Khoi> GetData(DataTable dt)
+        //{
+        //    List<Khoi> lst = new List<Khoi>();
+        //    foreach (DataRow dr in dt.Rows)
+        //    {
+        //        lst.Add(new Khoi(dr));
+        //    }
 
-            return lst;
-        }
+        //    return lst;
+        //}
 
         #endregion
     }

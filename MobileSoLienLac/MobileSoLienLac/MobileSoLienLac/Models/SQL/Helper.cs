@@ -36,7 +36,7 @@ namespace MobileSoLienLac.Models.SQL
                 //Message = "The transaction ended in the trigger. The batch has been aborted."
                 catch (Exception ex)
                 {
-                    string a = ex.Message;
+                    return StringErrorToIDError(ex);
                 }
                 finally
                 {
@@ -50,9 +50,9 @@ namespace MobileSoLienLac.Models.SQL
             return 0;
         }
 
-        public async Task<DataTable> ExecuteQuery(string ProcName, params SqlParameter[] parameters)
+        public async Task<DataTableSQL> ExecuteQuery(string ProcName, params SqlParameter[] parameters)
         {
-            DataTable dt = new DataTable();
+            DataTableSQL val = new DataTableSQL();
 
             using (SqlConnection con = new SqlConnection(connStr))
             {
@@ -70,17 +70,16 @@ namespace MobileSoLienLac.Models.SQL
 
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                         {
-                            adapter.Fill(dt);
+                            adapter.Fill(val.Data);
                         }
 
                     }
                 }
                 catch (Exception ex)
                 {
-                        dt = new DataTable();
-                    dt.Columns.Add("Error");
-                    dt.Rows.Add(StringErrorToIDError(ex.Message));
-                    return dt;
+                    val.Error = StringErrorToIDError(ex);
+                    val.Data = null;
+                    return val;
                 }
                 finally
                 {
@@ -91,10 +90,50 @@ namespace MobileSoLienLac.Models.SQL
                 }
             }
 
-            return dt;
+            return val;
         }
 
-        public async Task<T> ExecuteScalar<T>(string ProcName, params SqlParameter[] parameters)
+        #region ExecuteScalar
+
+        public async Task<ObjectSQL<T>> ExecuteScalar<T>(string ProcName, params SqlParameter[] parameters)
+        {
+            ObjectSQL<T> val = new ObjectSQL<T>();
+            using (SqlConnection con = new SqlConnection(connStr))
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand(ProcName, con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        if (parameters != null)
+                        {
+                            cmd.Parameters.AddRange(parameters);
+                        }
+
+                        await con.OpenAsync();
+                        var Val = await cmd.ExecuteScalarAsync();
+
+                        val.Value = (Val == null) ? default(T) : (T)Convert.ChangeType(Val, typeof(T));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    val.Error = StringErrorToIDError(ex);
+                    return val;
+                }
+                finally
+                {
+                    if (con.State == ConnectionState.Open)
+                    {
+                        con.Close();
+                    }
+                }
+
+                return val;
+            }
+        }
+
+        public async Task<int> ExecuteScalarCount(string ProcName, params SqlParameter[] parameters)
         {
             using (SqlConnection con = new SqlConnection(connStr))
             {
@@ -111,13 +150,13 @@ namespace MobileSoLienLac.Models.SQL
                         await con.OpenAsync();
                         var Val = await cmd.ExecuteScalarAsync();
 
-                        return (Val == null) ? default(T) : (T)Convert.ChangeType(Val, typeof(T));
+                        return (Val == null) ? -1 :Convert.ToInt32(Val);
 
                     }
                 }
                 catch (Exception ex)
                 {
-                    string a = ex.Message;
+                    return StringErrorToIDError(ex);
                 }
                 finally
                 {
@@ -127,9 +166,11 @@ namespace MobileSoLienLac.Models.SQL
                     }
                 }
 
-                return default(T);
+                return -1;
             }
         }
+
+        #endregion
 
         public string SlipString(string str)
         {

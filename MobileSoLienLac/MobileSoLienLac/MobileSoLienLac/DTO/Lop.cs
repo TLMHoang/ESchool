@@ -38,22 +38,22 @@ namespace MobileSoLienLac.DTO
 
         #region Handle with Database
 
-        public async Task<DataTable> GetData()
-        {
-            return await ExecuteQuery("SelectLop",
-                new SqlParameter("@ID", SqlDbType.Int) {Value = -1});
-        }
+        //public async Task<DataTable> GetData()
+        //{
+        //    return await ExecuteQuery("SelectLop",
+        //        new SqlParameter("@ID", SqlDbType.Int) {Value = -1});
+        //}
 
-        public List<Lop> GetData(DataTable dt)
-        {
-            List<Lop> lst = new List<Lop>();
-            foreach (DataRow dr in dt.Rows)
-            {
-                lst.Add(new Lop(dr));
-            }
+        //public List<Lop> GetData(DataTable dt)
+        //{
+        //    List<Lop> lst = new List<Lop>();
+        //    foreach (DataRow dr in dt.Rows)
+        //    {
+        //        lst.Add(new Lop(dr));
+        //    }
 
-            return lst;
-        }
+        //    return lst;
+        //}
 
 
         #endregion

@@ -31,23 +31,25 @@ namespace MobileSoLienLac.DTO
             IDTaiKhoan = Convert.IsDBNull(dr["IDTaiKhoan"]) ? -1 : Convert.ToInt32(dr["IDTaiKhoan"]);
         }
 
-        public async Task<DataTable> GetData(int IDTaiKhoan)
+        public async Task<ValueDTO<LienKetPHvsHS>> GetData(int IDTaiKhoan)
         {
-
-            return await ExecuteQuery("SelectLayHSQuanLy",
+            ValueDTO<LienKetPHvsHS> val = new ValueDTO<LienKetPHvsHS>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectLayHSQuanLy",
                 new SqlParameter("@IDTaiKhoan", SqlDbType.Int) {Value = IDTaiKhoan});
-        }
 
-        public List<LienKetPHvsHS> GetData(DataTable dt)
-        {
-            List<LienKetPHvsHS> lst = new List<LienKetPHvsHS>();
-
-            foreach (DataRow dr in dt.Rows)
+            if (dtSql.Error == 0)
             {
-                lst.Add(new LienKetPHvsHS(dr));
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new LienKetPHvsHS(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
             }
 
-            return lst;
+            return val;
         }
 
     }

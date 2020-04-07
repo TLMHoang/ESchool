@@ -26,123 +26,61 @@ namespace MobileSoLienLac.Views
             InitializeComponent();
         }
 
-        public async Task<bool> LoadGrade()
-        {
-            Khoi val = new Khoi();
-            DataTable dt = await val.GetData();
-            if (dt.Columns.Count == 1)
-            {
-                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
-                btn_Login.IsEnabled = true;
-                App.ResetSource();
-                return false;
-            }
-            else
-            {
-                App.lstKhois = val.GetData(dt);
-                return true;
-            }
-        }
-
-        public async Task<bool> LoadClass()
-        {
-            Lop val = new Lop();
-            DataTable dt = await val.GetData();
-            if (dt.Columns.Count == 1)
-            {
-                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
-                btn_Login.IsEnabled = true;
-                App.ResetSource();
-                return false;
-            }
-            else
-            {
-                App.lstLops = val.GetData(dt);
-                return true;
-            }
-        }
-        //dang bug
         public async Task<bool> LoadLink()
         {
-            LienKetPHvsHS val = new LienKetPHvsHS();
-            DataTable dt = await val.GetData(App.IDAccount);
-            if (dt.Columns.Count == 1)
+            ValueDTO<LienKetPHvsHS> val = await new LienKetPHvsHS().GetData(App.IDAccount);
+            if (val.Error != 0)
             {
-                int IDError = Convert.ToInt32(dt.Rows[0]["Error"]);
-                string mess = error.IDErrorToNotify(IDError);
-                await DisplayAlert("Thông báo", mess, "OK");
+                await DisplayAlert("Thông báo", error.IDErrorToNotify(val.Error), "OK");
                 btn_Login.IsEnabled = true;
                 App.ResetSource();
                 return false;
             }
             else
             {
-                App.lstPHvsHs = val.GetData(dt);
+                App.lstPHvsHs = val.ListT;
                 return true;
             }
         }
 
         public async Task<bool> LoadConduct()
         {
-            LoaiHanhKiem val = new LoaiHanhKiem();
-            DataTable dt = await val.GetData();
-            if (dt.Columns.Count == 1)
+            ValueDTO<LoaiHanhKiem> val = await new LoaiHanhKiem().GetData();
+            if (val.Error != 0)
             {
-                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
+                await DisplayAlert("Thông báo", error.IDErrorToNotify(val.Error), "OK");
                 btn_Login.IsEnabled = true;
                 App.ResetSource();
                 return false;
             }
             else
             {
-                App.lstLoaiHanhKiems = val.GetData(dt);
-                return true;
-            }
-        }
-
-        public async Task<bool> LoadSpeciesStudent()
-        {
-            LoaiHocSinh val = new LoaiHocSinh();
-            DataTable dt = await val.GetData();
-            if (dt.Columns.Count == 1)
-            {
-                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
-                btn_Login.IsEnabled = true;
-                App.ResetSource();
-                return false;
-            }
-            else
-            {
-                App.lstLoaiHocSinhs = val.GetData(dt);
+                App.lstLoaiHanhKiems = val.ListT;
                 return true;
             }
         }
 
         public async Task<bool> LoadSpeciesPoint()
         {
-            LoaiDiem val = new LoaiDiem();
-            DataTable dt = await val.GetData();
-            if (dt.Columns.Count == 1)
+            ValueDTO<LoaiDiem> val = await new LoaiDiem().GetData();
+            if (val.Error != 0)
             {
-                await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
+                await DisplayAlert("Thông báo", error.IDErrorToNotify(val.Error), "OK");
                 btn_Login.IsEnabled = true;
                 App.ResetSource();
                 return false;
             }
             else
             {
-                App.lstLoaiDiems = val.GetData(dt);
+                App.lstLoaiDiems = val.ListT;
                 return true;
             }
         }
 
         public async Task<bool> LoadDataInDatabase()
         {
-            if (!(await LoadGrade())) return false;
-            if (!(await LoadClass())) return false;
             if (!(await LoadLink())) return false;
             if (!(await LoadConduct())) return false;
-            if (!(await LoadSpeciesStudent())) return false;
             if (!(await LoadSpeciesPoint())) return false;
 
             foreach (LienKetPHvsHS i in App.lstPHvsHs)

@@ -30,11 +30,25 @@ namespace MobileSoLienLac.DTO
 
         #region Handle with Database
 
-        public async Task<DataTable> GetData()
+        public async Task<ValueDTO<LoaiHanhKiem>> GetData()
         {
-
-            return await ExecuteQuery("SelectHanhKiem",
+            ValueDTO<LoaiHanhKiem> val = new ValueDTO<LoaiHanhKiem>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectHanhKiem",
                 new SqlParameter("@ID", SqlDbType.Int) { Value = -1 });
+
+            if (dtSql.Error == 0)
+            {
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new LoaiHanhKiem(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
+            }
+
+            return val;
         }
 
         public List<LoaiHanhKiem> GetData(DataTable dt)

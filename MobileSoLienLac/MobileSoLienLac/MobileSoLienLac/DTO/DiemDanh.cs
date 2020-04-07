@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 using MobileSoLienLac.Models.SQL;
@@ -39,9 +40,24 @@ namespace MobileSoLienLac.DTO
         }
 
 
-        public async Task<int> GetAbsent(int IDStudent, int Month)
+        public async Task<int> GetAbsent(int IDStudent, int Month, byte Phep)
         {
+            DateTime date = DateTime.Now;
+            if (date.Month < 8)
+            {
+                date = new DateTime(date.Year, Month, 1);
+            }
+            else
+            {
+                date = new DateTime(date.Year - 1, Month, 1);
+            }
 
+            return await ExecuteScalarCount("GetNgayNghi",
+                new SqlParameter("@IDHocSinh", SqlDbType.Int) {Value = IDStudent},
+                new SqlParameter("@StartDate", SqlDbType.Date) {Value = date},
+                new SqlParameter("@EndDate", SqlDbType.Date) {Value = new DateTime(date.Year, Month + 1, 1)},
+                new SqlParameter("@Phep", SqlDbType.Bit) {Value = Phep}
+            );
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MobileSoLienLac.Models.SQL;
 
 namespace MobileSoLienLac.DTO
-{
+{// Có thể xóa
     public class LoaiThongBao : Helper
     {
         public int ID { get; set; }
@@ -30,23 +30,28 @@ namespace MobileSoLienLac.DTO
 
         #region Handle with Database
 
-        public async Task<DataTable> GetData()
-        {
+        //public async Task<ValueDTO<LoaiThongBao>> GetData()
+        //{
+        //    ValueDTO<LoaiThongBao> val = new ValueDTO<LoaiThongBao>();
+        //    DataTableSQL dtSql = await ExecuteQuery("SelectLoaiThongBao",
+        //        new SqlParameter("@ID", SqlDbType.Int) { Value = -1 });
+        //    if (dtSql.Error == null)
+        //    {
+                
+        //    }
+        //    return val;
+        //}
 
-            return await ExecuteQuery("SelectLoaiThongBao",
-                new SqlParameter("@ID", SqlDbType.Int) { Value = -1 });
-        }
+        //public List<LoaiThongBao> GetData(DataTable dt)
+        //{
+        //    List<LoaiThongBao> lst = new List<LoaiThongBao>();
+        //    foreach (DataRow dr in dt.Rows)
+        //    {
+        //        lst.Add(new LoaiThongBao(dr));
+        //    }
 
-        public List<LoaiThongBao> GetData(DataTable dt)
-        {
-            List<LoaiThongBao> lst = new List<LoaiThongBao>();
-            foreach (DataRow dr in dt.Rows)
-            {
-                lst.Add(new LoaiThongBao(dr));
-            }
-
-            return lst;
-        }
+        //    return lst;
+        //}
 
         #endregion
     }

@@ -8,25 +8,24 @@ namespace MobileSoLienLac.Models.SQL
 {
     public class HandleError
     {
-        public int StringErrorToIDError(string strError)
+        public int StringErrorToIDError(Exception ex)
         {
-
-            if (strError.Contains("Snix_Connect"))
+            if (ex.Message.Contains("Snix_Connect"))
             {
                 return -40;
             }
             //Error Could not read data
-            if (strError.Contains("Snix_Read"))
+            if (ex.Message.Contains("Snix_Read"))
             {
                 return -35;
             }
             //Error Could not find stored procedure
-            if (strError.Contains("Could not find stored procedure"))
+            if (ex.Message.Contains("Could not find stored procedure"))
             {
                 return -45;
             }
 
-            if (strError.Contains("Login failed for user"))
+            if (ex.Message.Contains("Login failed for user"))
             {
                 return -50;
             }
