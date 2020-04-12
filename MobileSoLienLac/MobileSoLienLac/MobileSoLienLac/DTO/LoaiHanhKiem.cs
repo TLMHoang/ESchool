@@ -29,7 +29,7 @@ namespace MobileSoLienLac.DTO
         }
 
         #region Handle with Database
-
+        //alter
         public async Task<ValueDTO<LoaiHanhKiem>> GetData()
         {
             ValueDTO<LoaiHanhKiem> val = new ValueDTO<LoaiHanhKiem>();
@@ -49,17 +49,6 @@ namespace MobileSoLienLac.DTO
             }
 
             return val;
-        }
-
-        public List<LoaiHanhKiem> GetData(DataTable dt)
-        {
-            List<LoaiHanhKiem> lst = new List<LoaiHanhKiem>();
-            foreach (DataRow dr in dt.Rows)
-            {
-                lst.Add(new LoaiHanhKiem(dr));
-            }
-
-            return lst;
         }
 
         #endregion

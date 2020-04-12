@@ -12,11 +12,11 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
                 FontSize="Large"/>
-            <ListView x:Name="lvLstNotify" RowHeight="60">
+            <ListView x:Name="lvLstNotify" RowHeight="100">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
+                            <StackLayout VerticalOptions="CenterAndExpand">
                                 <Label x:Name="lvText" Text="{Binding TenThongBao}" FontSize="Large"/>
                                 <Label Text="{Binding Ngay, Converter={StaticResource ConvertDateTimeToDate}}"/>
                             </StackLayout>

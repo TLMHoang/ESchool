@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobileSoLienLac.Views.Student.RollCall.RegistrationRollCallPage"
+             Title="Xin phép nghỉ học"
+             x:Name="ContentPageRRollCall">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="btnEdit" Text="Sửa" 
+                     Clicked="BtnEdit_OnClicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0"
+                           Text="Nghỉ từ ngày:"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           FontSize="Medium"/>
+                    <DatePicker Grid.Row="0" Grid.Column="1"
+                                x:Name="dpkFrom"/>
+                    <Label Grid.Row="1" Grid.Column="0"
+                           FontSize="Medium"
+                           Text="Nghỉ đến ngày:"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"/>
+                    <DatePicker Grid.Row="1" Grid.Column="1"
+                                x:Name="dpkTo"/>
+                </Grid>
+                <Editor x:Name="edtContent"
+                        HeightRequest="200"
+                        Placeholder="Lý do xin nghỉ"
+                        Margin="10,0,10,0"/>
+                <Button x:Name="btnSave" Text="Gửi"
+                        HorizontalOptions="EndAndExpand"
+                        Margin="0,0,20,0"
+                        Clicked="Button_OnClicked"/>
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

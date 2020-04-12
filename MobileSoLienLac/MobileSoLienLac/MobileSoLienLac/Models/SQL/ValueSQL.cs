@@ -13,7 +13,7 @@ namespace MobileSoLienLac.Models.SQL
         public DataTableSQL()
         {
             Error = 0;
-            Data = null;
+            Data = new DataTable();
         }
     }
 
@@ -21,5 +21,11 @@ namespace MobileSoLienLac.Models.SQL
     {
         public int Error { get; set; }
         public T Value { get; set; }
+
+        public ObjectSQL()
+        {
+            Error = 0;
+            Value = default(T);
+        }
     }
 }

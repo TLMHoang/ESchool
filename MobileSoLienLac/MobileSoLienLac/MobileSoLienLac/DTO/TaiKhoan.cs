@@ -8,7 +8,7 @@ using MobileSoLienLac.Models.SQL;
 
 namespace MobileSoLienLac.DTO
 {
-    public class TaiKhoan
+    public class TaiKhoan : Helper
     {
         public int ID { get; set; }
         public string UserName { get; set; }
@@ -51,7 +51,7 @@ namespace MobileSoLienLac.DTO
 
         public async Task<int> ChangePassword(int ID, string OldPassword, string NewPassword)
         {
-            return await new Helper().ExecuteNonQuery("DoiMatKhauPH",
+            return await ExecuteNonQuery("DoiMatKhauPH",
                 new SqlParameter("@ID", SqlDbType.Int) { Value = ID},
                 new SqlParameter("@MatKhauCu", SqlDbType.VarChar) { Value = OldPassword},
                 new SqlParameter("@MatKhauMoi", SqlDbType.VarChar) { Value = NewPassword}

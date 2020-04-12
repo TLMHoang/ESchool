@@ -10,24 +10,79 @@
             <Picker x:Name="PickerMonth"
                     Title="Chọn tháng"
                     HorizontalOptions="CenterAndExpand"/>
-            <Grid HorizontalOptions="Fill">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="0"
-                       Text="Tiền học: "/>
-                <Label Grid.Row="1" Grid.Column="0"
-                       Text="Tiền điện: "/>
-                <Label Grid.Row="2" Grid.Column="0"
-                       Text="Tiền vệ sinh: "/>
-                <Label Grid.Row="3" Grid.Column="0"
-                       Text="Tiền Nước: "/>
-            </Grid>
+            <Label x:Name="lblChiTiet"
+                   Text="Chi tiết" 
+                   FontSize="Large"
+                   HorizontalOptions="CenterAndExpand"/>
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Tiền học: "
+                               FontSize="Medium"
+                               />
+                        <Label HorizontalOptions="EndAndExpand"
+                               FontSize="Medium"
+                               x:Name="lblHoc"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Tiền ăn: "
+                               FontSize="Medium"
+                               />
+                        <Label HorizontalOptions="EndAndExpand"
+                               FontSize="Medium"
+                               x:Name="lblAn"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Tiền điện: "
+                               FontSize="Medium"
+                               />
+                        <Label HorizontalOptions="EndAndExpand"
+                               FontSize="Medium"
+                               x:Name="lblDien"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Tiền nước: "
+                               FontSize="Medium"
+                               />
+                        <Label HorizontalOptions="EndAndExpand"
+                               FontSize="Medium"
+                               x:Name="lblNuoc"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Tiền tài liệu: "
+                               FontSize="Medium"
+                               />
+                        <Label HorizontalOptions="EndAndExpand"
+                               FontSize="Medium"
+                               x:Name="lblTaiLieu"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Tiền ttb: "
+                               FontSize="Medium"
+                               />
+                        <Label HorizontalOptions="EndAndExpand"
+                               FontSize="Medium"
+                               x:Name="lblTTBi"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Tiền vệ sinh: "
+                               FontSize="Medium"
+                               />
+                        <Label HorizontalOptions="EndAndExpand"
+                               FontSize="Medium"
+                               x:Name="lblVeSinh"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label TextColor="Red"
+                               FontSize="Medium"
+                               Text="Tổng: "/>
+                        <Label HorizontalOptions="EndAndExpand"
+                               TextColor="Red"
+                               FontSize="Medium"
+                               x:Name="lblTong"/>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

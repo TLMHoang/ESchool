@@ -24,21 +24,26 @@ namespace MobileSoLienLac.Models
 
         #region Handle with Database
 
-        public async Task<DataTable> GetData(int IDClass)
+        public async Task<ValueDTO<ModelListStudent>> GetData(int IDClass)
         {
-            return await ExecuteQuery("SelectHocSinhTrongLop",
+            ValueDTO<ModelListStudent> val = new ValueDTO<ModelListStudent>();
+            DataTableSQL dtSQL = await ExecuteQuery("SelectHocSinhTrongLop",
                 new SqlParameter("@IDLop", SqlDbType.Int) { Value = IDClass });
+            if (dtSQL.Error == 0)
+            {
+                foreach (DataRow dr in dtSQL.Data.Rows)
+                {
+                    val.ListT.Add(new ModelListStudent(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSQL.Error;
+            }
+
+            return val;
         }
 
-        public List<ModelListStudent> GetData(DataTable dt)
-        {
-            List<ModelListStudent> lst = new List<ModelListStudent>();
-            foreach (DataRow dr in dt.Rows)
-            {
-                lst.Add(new ModelListStudent(dr));
-            }
-            return lst;
-        }
 
         #endregion
     }

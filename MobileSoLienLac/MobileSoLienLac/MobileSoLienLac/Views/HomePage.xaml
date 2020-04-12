@@ -67,6 +67,20 @@
                     Image="daterange.png" ContentLayout="Top"
                     BackgroundColor="White"
                     Clicked="BtnSchedule_OnClicked"/>
+                    <Button Grid.Row="2" Grid.Column="0" 
+                            Text="Xin phép" 
+                            x:Name="btnRRollCall"
+                            Image="eventavailable.png" 
+                            ContentLayout="Top"
+                            BackgroundColor="White"
+                            Clicked="BtnRRollCall_OnClicked"/>
+                    <Button Grid.Row="2" Grid.Column="1" 
+                            Text="Điểm danh" 
+                            x:Name="btnListRollCall"
+                            Image="eventbusy.png" 
+                            ContentLayout="Top"
+                            BackgroundColor="White"
+                            Clicked="BtnListRollCall_OnClicked"/>
                     <!--<Button Grid.Row="0" Grid.Column="1" 
                     Text="" 
                     Image="" ContentLayout="Top"

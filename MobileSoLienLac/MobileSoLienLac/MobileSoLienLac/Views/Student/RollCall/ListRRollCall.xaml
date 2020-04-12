@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobileSoLienLac.Views.Student.RollCall.ListRRollCall">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Thêm" Clicked="MenuItem_OnClicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout x:Name="StackLayoutMain" >
+            <Picker x:Name="PickerChoose"
+                    IsVisible="False"
+                    Title="Chức năng"/>
+            <Label x:Name="lblNotify" Text="Không có xin phép nào"
+                   HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="CenterAndExpand"/>
+            <ListView x:Name="ListViewRRollCall"
+                      VerticalOptions="Fill" 
+                      RowHeight="120"
+                      SelectionMode="Single">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{Binding TrangThai, Converter={StaticResource ConvertByteToColor}}">
+                                <Grid VerticalOptions="CenterAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0"
+                                           Text="{Binding NghiTu, Converter={StaticResource ConvertDateTimeToDate}}"
+                                           FontSize="Medium"/>
+                                    <Label Grid.Row="1" Grid.Column="0"
+                                           Text="{Binding NghiDen, Converter={StaticResource ConvertDateTimeToDate}}"
+                                           FontSize="Medium"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
+                                           Text="{Binding TrangThai, Converter={StaticResource ConvertTrangThaiByteToString}}"
+                                           VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand"
+                                           HorizontalTextAlignment="End" HorizontalOptions="CenterAndExpand"/>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

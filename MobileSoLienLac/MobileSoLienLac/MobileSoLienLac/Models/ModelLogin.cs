@@ -4,17 +4,32 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
+using MobileSoLienLac.DTO;
 using MobileSoLienLac.Models.SQL;
 
 namespace MobileSoLienLac.Models
 {
-    public class ModelLogin
+    public class ModelLogin :Helper
     {
-        public async Task<DataTable> PostUserToDatabase(string NameUser, string PasswordUser)
+        public async Task<ValueDTO<TaiKhoan>> PostUserToDatabase(string NameUser, string PasswordUser)
         {
-            return await new Helper().ExecuteQuery("DangNhapPH",
+            ValueDTO<TaiKhoan> val = new ValueDTO<TaiKhoan>();
+            DataTableSQL dtSql = await ExecuteQuery("DangNhapPH",
                 new SqlParameter("@TaiKhoan", SqlDbType.VarChar) { Value = NameUser },
                 new SqlParameter("@MatKhau", SqlDbType.VarChar) { Value = PasswordUser });
+            if (dtSql.Error == 0)
+            {
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new TaiKhoan(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
+            }
+
+            return val;
         }
 
         public int CheckEntryNull(string UserAccount, string PassAccount)

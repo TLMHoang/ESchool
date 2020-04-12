@@ -36,54 +36,65 @@ namespace MobileSoLienLac.Models
             Ngay = Convert.ToDateTime(dr["Ngay"]);
         }
 
-        public async Task<DataTable> GetDataSchool()
+        public async Task<ValueDTO<NotifyModel>> GetDataSchool()
         {
-            return await ExecuteQuery("SelectListThongBaoTruong");
-        }
+            ValueDTO<NotifyModel> val = new ValueDTO<NotifyModel>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectListThongBaoTruong");
 
-        public List<NotifyModel> GetDataSchool(DataTable dt)
-        {
-            List<NotifyModel> lst = new List<NotifyModel>();
-            foreach (DataRow dr in dt.Rows)
+            if (dtSql.Error == 0)
             {
-                lst.Add(new NotifyModel(dr));
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new NotifyModel(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
             }
 
-            return lst;
+            return val;
         }
 
-        public async Task<DataTable> GetDataClass(int IDClass)
+        public async Task<ValueDTO<NotifyModel>> GetDataClass(int IDClass)
         {
-            return await ExecuteQuery("SelectListThongBaoLop", 
-                new SqlParameter("@IDLop", SqlDbType.Int){Value = IDClass});
-        }
+            ValueDTO<NotifyModel> val = new ValueDTO<NotifyModel>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectListThongBaoLop",
+                new SqlParameter("@IDLop", SqlDbType.Int) { Value = IDClass });
 
-        public List<NotifyModel> GetDataClass(DataTable dt)
-        {
-            List<NotifyModel> lst = new List<NotifyModel>();
-            foreach (DataRow dr in dt.Rows)
+            if (dtSql.Error == 0)
             {
-                lst.Add(new NotifyModel(dr));
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new NotifyModel(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
             }
 
-            return lst;
+            return val;
         }
 
-        public async Task<DataTable> GetDataStudent(int IDHocSinh)
+        public async Task<ValueDTO<NotifyModel>> GetDataStudent(int IDHocSinh)
         {
-            return await ExecuteQuery("SelectListThongBaoHS",
-            new SqlParameter("@IDHocSinh", SqlDbType.Int) { Value = IDHocSinh });
-        }
-
-        public List<NotifyModel> GetDataStudent(DataTable dt)
-        {
-            List<NotifyModel> lst = new List<NotifyModel>();
-            foreach (DataRow dr in dt.Rows)
+            ValueDTO<NotifyModel> val = new ValueDTO<NotifyModel>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectListThongBaoHS",
+                new SqlParameter("@IDHocSinh", SqlDbType.Int) { Value = IDHocSinh });
+            if (dtSql.Error == 0)
             {
-                lst.Add(new NotifyModel(dr));
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new NotifyModel(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
             }
 
-            return lst;
+            return val;
         }
 
     }

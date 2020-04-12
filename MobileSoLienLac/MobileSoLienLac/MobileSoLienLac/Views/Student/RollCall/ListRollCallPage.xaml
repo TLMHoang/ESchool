@@ -4,27 +4,22 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MobileSoLienLac.Views.Class.ListTeacherPage">
+             x:Class="MobileSoLienLac.Views.Student.RollCall.ListRollCallPage">
     <ContentPage.Content>
         <StackLayout x:Name="StackLayoutMain">
             <Label x:Name="lblNotify"
-                   Text="Không lấy được danh sách"
+                   Text="Học Sinh chưa có nghỉ học"
                    FontSize="Large"
                    HorizontalOptions="CenterAndExpand"
                    VerticalOptions="CenterAndExpand"/>
-            <ListView x:Name="ListViewListTeacher" SelectionMode="None" RowHeight="100">
+            <ListView x:Name="ListViewListRollCall" SelectionMode="None" RowHeight="60">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Margin="20,0,20,0" VerticalOptions="CenterAndExpand">
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding TenGV}" FontSize="Large"/>
-                                    <Label Text="{Binding TenMon}" HorizontalOptions="EndAndExpand"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="SĐT: "></Label>
-                                    <Label Text="{Binding SDT}"/>
-                                    <Label Text="{Binding IDLop , Converter={StaticResource ConvertIntToPortSubjectyOrHomeRoom}}" HorizontalOptions="EndAndExpand"/>
+                            <StackLayout VerticalOptions="Fill" BackgroundColor="{Binding Phep, Converter={StaticResource ConvertByteToColor}}">
+                                <StackLayout Margin="20,0,20,0" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                    <Label Text="{Binding NgayNghi, Converter={StaticResource ConvertDateTimeToDate}}" FontSize="Large"/>
+                                    <Label Text="{Binding Phep, Converter={StaticResource ConvertVangByteToString}}" HorizontalOptions="EndAndExpand"/>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>

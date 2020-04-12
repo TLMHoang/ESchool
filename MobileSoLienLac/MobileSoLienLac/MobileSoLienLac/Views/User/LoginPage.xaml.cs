@@ -87,18 +87,16 @@ namespace MobileSoLienLac.Views
             {
                 #region Load Strudent 
 
-                DataTable dt = await valHS.GetDaTa(i.IDHocSinh);
-                if (dt.Columns.Count == 1)
+                ValueDTO<ThongTinHS> val = await valHS.GetDaTa(i.IDHocSinh);
+                if (val.Error != 0)
                 {
-                    
-                    await DisplayAlert("Thông báo", error.IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
                     btn_Login.IsEnabled = true;
                     App.ResetSource();
                     return false;
                 }
                 else
                 {
-                    App.lstStudents.Add(new ThongTinHS(dt.Rows[0]));
+                    App.lstStudents.Add(val.ListT[0]);
                 }
 
                 #endregion
@@ -115,32 +113,35 @@ namespace MobileSoLienLac.Views
             int val = new ModelLogin().CheckEntryNull(Entry_Username.Text, Entry_Password.Text);
             if (val == 0)
             {
-                string strRetrun = (await new LoginViewModel().CheckLogin(Entry_Username.Text, Entry_Password.Text));
-                if (strRetrun.Length == 0)
+                ValueDTO<TaiKhoan> tk = await new LoginViewModel().CheckLogin(Entry_Username.Text, Entry_Password.Text);
+                if (tk.Error == 0)
                 {
-                    if (await LoadDataInDatabase())
+                    if (tk.ListT.Count == 1)
                     {
-                        await DisplayAlert("Thông báo", "Đăng nhập thành công", "Ok");
-
-                        Application.Current.MainPage = new MainPage();
+                        App.IDAccount = tk.ListT[0].ID;
+                        if (await LoadDataInDatabase())
+                        {
+                            await DisplayAlert("Thông báo", "Đăng nhập thành công", "Ok");
+                            Application.Current.MainPage = new MainPage();
+                        }
+                        else
+                        {
+                            await DisplayAlert("Thông báo", "Đăng nhập thất bại. Không thể load được vì mạng yếu. hoặc chưa bật mạng vui lòng kiểm tra lại.", "OK");
+                            LoginFaild();
+                            btn_Login.IsEnabled = true;
+                        }
                     }
                     else
                     {
-                        await DisplayAlert("Thông báo", "Đăng nhập thất bại. Không thể load được vì mạng yếu. hoặc chưa bật mạng vui lòng kiểm tra lại.", "OK");
+                        await DisplayAlert("Thông báo", "Đăng nhập thất bại.\nTài khoản hoặc mật khẩu không chính xác", "OK");
                         LoginFaild();
                         btn_Login.IsEnabled = true;
                     }
                     
                 }
-                else if (strRetrun.Length == 1)
-                {
-                    await DisplayAlert("Thông báo", "Đăng nhập thất bại.\nTài khoản hoặc mật khẩu không chính xác", "OK");
-                    LoginFaild();
-                    btn_Login.IsEnabled = true;
-                }
                 else
                 {
-                    await DisplayAlert("Thông báo", strRetrun, "OK");
+                    await DisplayAlert("Thông báo", error.IDErrorToNotify(tk.Error), "OK");
                     btn_Login.IsEnabled = true;
                 }
             }

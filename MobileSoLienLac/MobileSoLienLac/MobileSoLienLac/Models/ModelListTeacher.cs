@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
+using MobileSoLienLac.DTO;
 using MobileSoLienLac.Models.SQL;
 
 namespace MobileSoLienLac.Models
@@ -41,22 +42,24 @@ namespace MobileSoLienLac.Models
 
         #region Handle wwith database
 
-        public async Task<DataTable> GetData(int IDLop)
+        public async Task<ValueDTO<ModelListTeacher>> GetData(int IDLop)
         {
-            return await ExecuteQuery("SelectThongTinGV",
-                new SqlParameter("@IDLop", SqlDbType.Int) {Value = IDLop}
-            );
-        }
-
-        public List<ModelListTeacher> GetData(DataTable dt)
-        {
-            List<ModelListTeacher> lst = new List<ModelListTeacher>();
-            foreach (DataRow dr in dt.Rows)
+            ValueDTO<ModelListTeacher> val = new ValueDTO<ModelListTeacher>();
+            DataTableSQL dtSQL = await ExecuteQuery("SelectThongTinGV",
+                new SqlParameter("@IDLop", SqlDbType.Int) { Value = IDLop });
+            if (dtSQL.Error == 0)
             {
-                lst.Add(new ModelListTeacher(dr));
+                foreach (DataRow dr in dtSQL.Data.Rows)
+                {
+                    val.ListT.Add(new ModelListTeacher(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSQL.Error;
             }
 
-            return lst;
+            return val;
         }
 
         #endregion

@@ -21,6 +21,9 @@
             <converter:ConvertByteToSex x:Key="ConvertByteToSex"/>
             <converter:ConvertIntToLoaiHanhKiem x:Key="ConvertIntToLoaiHanhKiem"/>
             <converter:ConvertIntToPortSubjectyOrHomeRoom x:Key="ConvertIntToPortSubjectyOrHomeRoom"/>
+            <converter:ConvertTrangThaiByteToString x:Key="ConvertTrangThaiByteToString"/>
+            <converter:ConvertByteToColor x:Key="ConvertByteToColor"/>
+            <converter:ConvertVangByteToString x:Key="ConvertVangByteToString"/>
         </ResourceDictionary>
     </Application.Resources>
     

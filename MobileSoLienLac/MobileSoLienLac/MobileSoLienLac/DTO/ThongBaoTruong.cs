@@ -39,32 +39,46 @@ namespace MobileSoLienLac.DTO
             Ngay = Convert.ToDateTime(dr["Ngay"]);
         }
 
-        public async Task<DataTable> GetData()
+        public async Task<ValueDTO<ThongBaoTruong>> GetData()
         {
-            return await ExecuteQuery("SelectThongBaoTruong",
-                new SqlParameter("@ID", SqlDbType.Int){Value = -1});
-        }
+            ValueDTO<ThongBaoTruong> val = new ValueDTO<ThongBaoTruong>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectThongBaoTruong",
+                new SqlParameter("@ID", SqlDbType.Int) { Value = -1 });
 
-        public List<ThongBaoTruong> GetData(DataTable dt)
-        {
-            List<ThongBaoTruong> lst = new List<ThongBaoTruong>();
-            foreach (DataRow dr in dt.Rows)
+            if (dtSql.Error != 0)
             {
-                lst.Add(new ThongBaoTruong(dr));
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new ThongBaoTruong(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
             }
 
-            return lst;
+            return val;
         }
 
-        public ThongBaoTruong GetData(DataRow dr)
+        public async Task<ValueDTO<ThongBaoTruong>> GetContent(int ID)
         {
-            return new ThongBaoTruong(dr);
-        }
+            ValueDTO<ThongBaoTruong> val = new ValueDTO<ThongBaoTruong>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectNoiDungThongBaoTruong",
+                new SqlParameter("@ID", SqlDbType.Int) { Value = ID });
 
-        public async Task<DataTable> GetContent(int ID)
-        {
-            return await ExecuteQuery("SelectNoiDungThongBaoTruong",
-                new SqlParameter("@ID", SqlDbType.Int) { Value =ID });
+            if (dtSql.Error == 0)
+            {
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new ThongBaoTruong(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
+            }
+
+            return val;
         }
     }
 }

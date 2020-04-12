@@ -17,6 +17,7 @@ using MobileSoLienLac.Views;
 using MobileSoLienLac.ViewModels;
 using MobileSoLienLac.Views.Class;
 using MobileSoLienLac.Views.Student.Fee;
+using MobileSoLienLac.Views.Student.RollCall;
 
 namespace MobileSoLienLac.Views
 {
@@ -52,17 +53,7 @@ namespace MobileSoLienLac.Views
 
         private async void BtnListTeacher_OnClicked(object sender, EventArgs e)
         {
-            ModelListTeacher val = new ModelListTeacher();
-            DataTable dt = await val.GetData(App.StudentSeclect.IDLop);
-
-            if (dt.Columns.Count == 1)
-            {
-                await DisplayAlert("Thông báo", new HandleError().IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
-            }
-            else
-            {
-                await Navigation.PushAsync(new ListTeacherPage(val.GetData(dt), "Giáo viên lớp " + App.StudentSeclect.TenLop));
-            }
+            await Navigation.PushAsync(new ListTeacherPage());
         }
 
         private async void BtnStudent_OnClicked(object sender, EventArgs e)
@@ -77,21 +68,23 @@ namespace MobileSoLienLac.Views
 
         private async void BtnListStudent_OnClicked(object sender, EventArgs e)
         {
-            ListStudentInClassViewModel _value = await new ListStudentInClassViewModel().GetData(App.StudentSeclect.IDLop);
-            if (_value.Message.Length == 0)
-            {
-                _value.Message = "Danh sách lớp " + App.StudentSeclect.TenLop;
-                await Navigation.PushAsync(new ListStudentInClassPage(_value));
-            }
-            else
-            {
-                await DisplayAlert("Thông báo", _value.Message, "OK");
-            }
+            await Navigation.PushAsync(new ListStudentInClassPage());
         }
 
         private void BtnSchedule_OnClicked(object sender, EventArgs e)
         {
             
+        }
+
+        //Event Xin phép nghỉ học
+        private async void BtnRRollCall_OnClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ListRRollCall());
+        }
+
+        private async void BtnListRollCall_OnClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ListRollCallPage());
         }
     }
 }

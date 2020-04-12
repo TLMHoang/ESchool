@@ -13,8 +13,8 @@
     </ContentPage.BackgroundImageSource>
     <ContentPage.Content>
         <StackLayout Margin="20">
-            <StackLayout VerticalOptions="EndAndExpand"
-                         TranslationY="{Binding Source={x:Reference btn_Login}, Path= Width}">
+            <StackLayout VerticalOptions="EndAndExpand">
+                <!--TranslationY="{Binding Source={x:Reference btn_Login}, Path= Width}">-->
                 <!--input username in here-->
                     <controls:CustomEntry x:Name="Entry_Username"
                                       Placeholder="Tài khoản/ Số điện thoại"
@@ -53,11 +53,11 @@
                         HorizontalOptions="CenterAndExpand"
                     Clicked="btn_Login_Clicked"/>
                     </StackLayout>
-            <Button x:Name="btn_Close"
+            <!--<Button x:Name="btn_Close"
                         Text="Thoát"
                         VerticalOptions="EndAndExpand"
                         HorizontalOptions="Center"
-                        Clicked="btn_Close_Clicked"/>
+                        Clicked="btn_Close_Clicked"/>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

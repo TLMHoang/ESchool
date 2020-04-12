@@ -43,32 +43,46 @@ namespace MobileSoLienLac.DTO
             Ngay = Convert.ToDateTime(dr["Ngay"]);
         }
 
-        public async Task<DataTable> GetData()
+        public async Task<ValueDTO<ThongBaoHS>> GetData()
         {
-            return await ExecuteQuery("SelectThongBaoHS",
+            ValueDTO<ThongBaoHS> val = new ValueDTO<ThongBaoHS>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectThongBaoHS",
                 new SqlParameter("@ID", SqlDbType.Int) { Value = -1 });
-        }
 
-        public List<ThongBaoHS> GetData(DataTable dt)
-        {
-            List<ThongBaoHS> lst = new List<ThongBaoHS>();
-            foreach (DataRow dr in dt.Rows)
+            if (dtSql.Error != 0)
             {
-                lst.Add(new ThongBaoHS(dr));
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new ThongBaoHS(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
             }
 
-            return lst;
+            return val;
         }
 
-        public ThongBaoHS GetData(DataRow dr)
+        public async Task<ValueDTO<ThongBaoHS>> GetContent(int ID)
         {
-            return new ThongBaoHS(dr);
-        }
+            ValueDTO<ThongBaoHS> val = new ValueDTO<ThongBaoHS>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectNoiDungThongBaoHS",
+                new SqlParameter("@ID", SqlDbType.Int) {Value = ID});
+            
+            if (dtSql.Error == 0)
+            {
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new ThongBaoHS(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
+            }
 
-        public async Task<DataTable> GetContent(int ID)
-        {
-            return await ExecuteQuery("SelectNoiDungThongBaoHS",
-                new SqlParameter("@ID", SqlDbType.Int) { Value = ID });
+            return val;
         }
     }
 }

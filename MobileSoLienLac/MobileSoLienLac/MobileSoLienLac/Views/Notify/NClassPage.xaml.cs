@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MobileSoLienLac.DTO;
+using MobileSoLienLac.Models;
 using MobileSoLienLac.Models.SQL;
 using MobileSoLienLac.ViewModels;
 using Xamarin.Forms;
@@ -16,15 +17,16 @@ namespace MobileSoLienLac.Views.Notify
     public partial class NClassPage : ContentPage
     {
         public ThongBaoLop VaLop = new ThongBaoLop();
+        List<NotifyModel> lstNC = new List<NotifyModel>();
 
         public NClassPage()
         {
             InitializeComponent();
             NotifyClass();
-            if (App.LstThongBaoLops.Count != 0)
+            if (lstNC.Count != 0)
             {
                 List<NotifyViewModel> lst = new List<NotifyViewModel>();
-                foreach (var i in App.LstThongBaoLops)
+                foreach (var i in lstNC)
                 {
                     lst.Add(new NotifyViewModel(i.ID, i.TenThongBao, i.Ngay));
                 }
@@ -36,22 +38,21 @@ namespace MobileSoLienLac.Views.Notify
                 {
                     if (lvLstNotify.SelectedItem != null)
                     {
-                        DataTable dt = await VaLop.GetContent((int)((NotifyViewModel)e.SelectedItem).ID);
-                        if (dt.Columns.Count == 1)
+                        ValueDTO<ThongBaoLop> val = await VaLop.GetContent((int)((NotifyViewModel)e.SelectedItem).ID);
+                        if (val.Error != 0)
                         {
                             await DisplayAlert("Thông báo",
-                                new HandleError().IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"])), "OK");
+                                new HandleError().IDErrorToNotify(val.Error), "OK");
                         }
                         else
                         {
-                            ThongBaoLop tbt = VaLop.GetData(dt.Rows[0]);
-                            if (tbt.NoiDung.Length >= 1000)
+                            if (val.ListT[0].NoiDung.Length >= 1000)
                             {
-                                await Navigation.PushAsync(new ShowNewPage((string)((NotifyViewModel)e.SelectedItem).TenThongBao, tbt.Ngay.ToString("dd-MM-yyyy"), tbt.NoiDung));
+                                await Navigation.PushAsync(new ShowNewPage((string)((NotifyViewModel)e.SelectedItem).TenThongBao, val.ListT[0].Ngay.ToString("dd-MM-yyyy"), val.ListT[0].NoiDung));
                             }
                             else
                             {
-                                await DisplayAlert((string)((NotifyViewModel)e.SelectedItem).TenThongBao, tbt.NoiDung, "OK");
+                                await DisplayAlert((string)((NotifyViewModel)e.SelectedItem).TenThongBao, val.ListT[0].NoiDung, "OK");
                             }
                         }
                     }
@@ -67,11 +68,15 @@ namespace MobileSoLienLac.Views.Notify
 
         public async void NotifyClass()
         {
-            string Message = await new NotifyViewModel().NotifyClass();
-            if (Message != "")
+            ValueDTO<NotifyModel> val = await new NotifyViewModel().NotifyClass();
+            if (val.Error != 0)
             {
                 lblNotify.Text = "Vui lòng thử lại.";
-                await DisplayAlert("Thông báo", Message, "OK");
+                await DisplayAlert("Thông báo", new HandleError().IDErrorToNotify(val.Error), "OK");
+            }
+            else
+            {
+                lstNC = val.ListT;
             }
         }
     }

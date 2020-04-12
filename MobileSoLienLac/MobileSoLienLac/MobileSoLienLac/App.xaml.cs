@@ -16,19 +16,9 @@ namespace MobileSoLienLac
         public static List<LienKetPHvsHS> lstPHvsHs;
         public static List<ThongTinHS> lstStudents = new List<ThongTinHS>();
         public static ThongTinHS StudentSeclect;
-        public static List<Lop> lstLops;
-        public static List<Khoi> lstKhois;
         public static List<LoaiDiem> lstLoaiDiems = new List<LoaiDiem>();
         public static List<LoaiHanhKiem> lstLoaiHanhKiems = new List<LoaiHanhKiem>();
-        public static List<LoaiHocSinh> lstLoaiHocSinhs = new List<LoaiHocSinh>();
 
-        #region Notify
-
-        public static List<NotifyModel> LstThongBaoTruongs = new List<NotifyModel>();
-        public static List<NotifyModel> LstThongBaoLops = new List<NotifyModel>();
-        public static List<NotifyModel> LstThongBaoHSs = new List<NotifyModel>();
-
-        #endregion
         public static int IDAccount;
         public static bool DakMode;
         #endregion
@@ -47,15 +37,8 @@ namespace MobileSoLienLac
             lstPHvsHs = new List<LienKetPHvsHS>();
             lstStudents = new List<ThongTinHS>();
             StudentSeclect = new ThongTinHS();
-            lstLops = new List<Lop>();
-            lstKhois = new List<Khoi>();
             lstLoaiDiems = new List<LoaiDiem>();
             lstLoaiHanhKiems = new List<LoaiHanhKiem>();
-            lstLoaiHocSinhs = new List<LoaiHocSinh>();
-
-            LstThongBaoTruongs = new List<NotifyModel>();
-            LstThongBaoLops = new List<NotifyModel>();
-            LstThongBaoHSs = new List<NotifyModel>();
 
             IDAccount = -1;
         }

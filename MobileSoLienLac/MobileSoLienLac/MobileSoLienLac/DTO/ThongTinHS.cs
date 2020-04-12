@@ -12,7 +12,7 @@ using MobileSoLienLac.Models.SQL;
 
 namespace MobileSoLienLac.DTO
 {
-    public class ThongTinHS : INotifyPropertyChanged
+    public class ThongTinHS : Helper
     {
 
         public int ID { get; set; }
@@ -82,18 +82,10 @@ namespace MobileSoLienLac.DTO
             IDLop = Convert.IsDBNull(dr["IDLop"]) ? -1 : Convert.ToInt32(dr["IDLop"]);
             TenLop = dr["TenKhoi"].ToString() + dr["TenLop"].ToString();
             TenLoai = dr["TenLoai"].ToString();
-            IDLoaiHocSinh = Convert.IsDBNull(dr["IDLoaiHocSinh"]) ? -1 : Convert.ToInt32(dr["IDLop"]);
+            IDLoaiHocSinh = Convert.IsDBNull(dr["IDLoaiHocSinh"]) ? -1 : Convert.ToInt32(dr["IDLoaiHocSinh"]);
             HKI = Convert.IsDBNull(dr["HKI"]) ? -1 : Convert.ToInt32(dr["HKI"]);
             HKII = Convert.IsDBNull(dr["HKII"]) ? -1 : Convert.ToInt32(dr["HKII"]);
             CaNam = Convert.IsDBNull(dr["CaNam"]) ? -1 : Convert.ToInt32(dr["CaNam"]);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #region Handle value
@@ -101,25 +93,30 @@ namespace MobileSoLienLac.DTO
 
         public override string ToString() => Ten + " - " + TenLop;
 
-        public string GetClass(int IDClass)
-        {
-            string Class = "";
-            Lop l = App.lstLops.FirstOrDefault(p => p.ID == IDClass);
-
-            Class = App.lstKhois.FirstOrDefault(p => p.ID == l.IDKhoi).TenKhoi + l.TenLop; 
-
-            return Class;
-        }
-
         #endregion
 
 
         #region Handle With Database
 
-        public async Task<DataTable> GetDaTa(int IDHocSinh)
+        public async Task<ValueDTO<ThongTinHS>> GetDaTa(int IDHocSinh)
         {
-            return await new Helper().ExecuteQuery("SelectThongTinHSv2",
+            ValueDTO<ThongTinHS> val = new ValueDTO<ThongTinHS>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectThongTinHSv2",
                 new SqlParameter("@ID", SqlDbType.Int) { Value = IDHocSinh });
+
+            if (dtSql.Error == 0)
+            {
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new ThongTinHS(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
+            }
+
+            return val;
         }
 
         #endregion

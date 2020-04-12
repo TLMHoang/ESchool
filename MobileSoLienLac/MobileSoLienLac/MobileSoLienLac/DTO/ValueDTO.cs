@@ -12,7 +12,7 @@ namespace MobileSoLienLac.DTO
         public ValueDTO()
         {
             Error = 0;
-            ListT = null;
+            ListT = new List<T>();
         }
     }
 }

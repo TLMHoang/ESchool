@@ -43,32 +43,46 @@ namespace MobileSoLienLac.DTO
             Ngay = Convert.ToDateTime(dr["Ngay"]);
         }
 
-        public async Task<DataTable> GetData()
+        public async Task<ValueDTO<ThongBaoLop>> GetData()
         {
-            return await ExecuteQuery("SelectThongBaoLop",
+            ValueDTO<ThongBaoLop> val = new ValueDTO<ThongBaoLop>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectThongBaoLop",
                 new SqlParameter("@ID", SqlDbType.Int) { Value = -1 });
-        }
 
-        public List<ThongBaoLop> GetData(DataTable dt)
-        {
-            List<ThongBaoLop> lst = new List<ThongBaoLop>();
-            foreach (DataRow dr in dt.Rows)
+            if (dtSql.Error != 0)
             {
-                lst.Add(new ThongBaoLop(dr));
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new ThongBaoLop(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
             }
 
-            return lst;
+            return val;
         }
 
-        public ThongBaoLop GetData(DataRow dr)
+        public async Task<ValueDTO<ThongBaoLop>> GetContent(int ID)
         {
-            return new ThongBaoLop(dr);
-        }
-
-        public async Task<DataTable> GetContent(int ID)
-        {
-            return await ExecuteQuery("SelectNoiDungThongBaoLop",
+            ValueDTO<ThongBaoLop> val = new ValueDTO<ThongBaoLop>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectNoiDungThongBaoLop",
                 new SqlParameter("@ID", SqlDbType.Int) { Value = ID });
+
+            if (dtSql.Error == 0)
+            {
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new ThongBaoLop(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
+            }
+
+            return val;
         }
     }
 }

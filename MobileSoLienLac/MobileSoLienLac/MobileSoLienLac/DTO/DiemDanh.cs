@@ -34,13 +34,13 @@ namespace MobileSoLienLac.DTO
         public DiemDanh(DataRow dr)
         {
             ID = Convert.IsDBNull(dr["ID"]) ? -1 : Convert.ToInt32(dr["ID"]);
-            IDHocSinh = Convert.IsDBNull(dr["IDHocSinh"]) ? -1 : Convert.ToInt32(dr["IDHocSinh"]); ;
+            IDHocSinh = Convert.IsDBNull(dr["IDHocSinh"]) ? -1 : Convert.ToInt32(dr["IDHocSinh"]);
             NgayNghi = Convert.ToDateTime(dr["NgayNghi"]);
             Phep = Convert.ToByte(dr["Phep"]);
         }
 
 
-        public async Task<int> GetAbsent(int IDStudent, int Month, byte Phep)
+        public async Task<ObjectSQL<int>> GetAbsent(int IDStudent, int Month, byte Phep)
         {
             DateTime date = DateTime.Now;
             if (date.Month < 8)
@@ -52,12 +52,33 @@ namespace MobileSoLienLac.DTO
                 date = new DateTime(date.Year - 1, Month, 1);
             }
 
-            return await ExecuteScalarCount("GetNgayNghi",
+            return await ExecuteScalar<int>("GetNgayNghi",
                 new SqlParameter("@IDHocSinh", SqlDbType.Int) {Value = IDStudent},
                 new SqlParameter("@StartDate", SqlDbType.Date) {Value = date},
                 new SqlParameter("@EndDate", SqlDbType.Date) {Value = new DateTime(date.Year, Month + 1, 1)},
                 new SqlParameter("@Phep", SqlDbType.Bit) {Value = Phep}
             );
+        }
+
+        public async Task<ValueDTO<DiemDanh>> GetData(int IDHocSinh)
+        {
+            ValueDTO<DiemDanh> val = new ValueDTO<DiemDanh>();
+            DataTableSQL dtSql = await ExecuteQuery("SelectChiTiepDiemDanh",
+                new SqlParameter("@IDHocSinh", SqlDbType.Int) {Value = IDHocSinh});
+
+            if (dtSql.Error == 0)
+            {
+                foreach (DataRow dr in dtSql.Data.Rows)
+                {
+                    val.ListT.Add(new DiemDanh(dr));
+                }
+            }
+            else
+            {
+                val.Error = dtSql.Error;
+            }
+
+            return val;
         }
     }
 }

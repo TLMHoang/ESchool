@@ -24,49 +24,20 @@ namespace MobileSoLienLac.ViewModels
             Ngay = ngay;
         }
 
-        public async Task<string> NotifySchool()
+        public NotifyModel val = new NotifyModel();
+        public async Task<ValueDTO<NotifyModel>> NotifySchool()
         {
-            DataTable dt = await new NotifyModel().GetDataSchool();
-            if (dt.Columns.Count == 1)
-            {
-                return new HandleError().IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"]));
-            }
-            else
-            {
-                App.LstThongBaoTruongs = new List<NotifyModel>();
-                App.LstThongBaoTruongs = new NotifyModel().GetDataSchool(dt);
-                return "";
-            }
+            return await val.GetDataSchool();
         }
 
-        public async Task<string> NotifyClass()
+        public async Task<ValueDTO<NotifyModel>> NotifyClass()
         {
-            DataTable dt = await new NotifyModel().GetDataClass(App.StudentSeclect.IDLop);
-            if (dt.Columns.Count == 1)
-            {
-                return new HandleError().IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"]));
-            }
-            else
-            {
-                App.LstThongBaoLops = new List<NotifyModel>();
-                App.LstThongBaoLops = new NotifyModel().GetDataClass(dt);
-                return "";
-            }
+            return await val.GetDataClass(App.StudentSeclect.IDLop);
         }
 
-        public async Task<string> NotifyStudent()
+        public async Task<ValueDTO<NotifyModel>> NotifyStudent()
         {
-            DataTable dt = await new NotifyModel().GetDataStudent(App.StudentSeclect.ID);
-            if (dt.Columns.Count == 1)
-            {
-                return new HandleError().IDErrorToNotify(Convert.ToInt32(dt.Rows[0]["Error"]));
-            }
-            else
-            {
-                App.LstThongBaoHSs = new List<NotifyModel>();
-                App.LstThongBaoHSs = new NotifyModel().GetDataStudent(dt);
-                return "";
-            }
+            return await val.GetDataStudent(App.StudentSeclect.ID);
         }
     }
 }
