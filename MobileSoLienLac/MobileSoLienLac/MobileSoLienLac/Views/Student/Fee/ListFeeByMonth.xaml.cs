@@ -13,11 +13,12 @@ namespace MobileSoLienLac.Views.Student.Fee
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListFeeByMonth : ContentPage
     {
-
+        private int NghiP;
 
         public ListFeeByMonth()
         {
             InitializeComponent();
+            //FillData();
 
             Title = "Học phí - " + App.StudentSeclect.Ten;
 
@@ -26,22 +27,28 @@ namespace MobileSoLienLac.Views.Student.Fee
                 PickerMonth.Items.Add("Tháng " + i);
             }
 
-
-            PickerMonth.SelectedIndexChanged += async (sender, e) =>
+            PickerMonth.SelectedIndex = DateTime.Now.Month - 1;
+            GetValue(DateTime.Now.Month);
+            PickerMonth.SelectedIndexChanged += (sender, e) =>
             {
-                ValueDTO<HocPhi> val = await GetData(GetMonth(PickerMonth.Items[PickerMonth.SelectedIndex]));
-                if (val.Error == 0)
-                {
-                    if (val.ListT.Count == 0)
-                    {
-                        FillData();
-                    }
-                    else
-                    {
-                        FillData(val.ListT[0]);
-                    }
-                }
+                GetValue(GetMonth(PickerMonth.Items[PickerMonth.SelectedIndex]));
             };
+        }
+
+        public async void GetValue(int month)
+        {
+            ValueDTO<HocPhi> val = await GetData(month);
+            if (val.Error == 0)
+            {
+                if (val.ListT.Count == 0)
+                {
+                    FillData();
+                }
+                else
+                {
+                    FillData(val.ListT[0], month);
+                }
+            }
         }
 
         public async Task<ValueDTO<HocPhi>> GetData(int thang)
@@ -50,6 +57,7 @@ namespace MobileSoLienLac.Views.Student.Fee
             ValueDTO<HocPhi> val = new ValueDTO<HocPhi>();
             if (NgayNghi.Error == 0)
             {
+                NghiP = NgayNghi.Value;
                 val = await new HocPhi().GetData(thang, App.StudentSeclect.IDLoaiHocSinh, App.StudentSeclect.IDKhoi, NgayNghi.Value);
                 if (val.Error != 0)
                 {
@@ -75,6 +83,9 @@ namespace MobileSoLienLac.Views.Student.Fee
         public void FillData()
         {
             lblAn.Text = "0";
+            lblDonGia.Text = "0";
+            lblNgayH.Text = "0";
+            lblNgayN.Text = "0";
             lblDien.Text = "0";
             lblHoc.Text = "0";
             lblNuoc.Text = "0";
@@ -82,20 +93,58 @@ namespace MobileSoLienLac.Views.Student.Fee
             lblTTBi.Text = "0";
             lblVeSinh.Text = "0";
             lblTong.Text = "0";
+            lblTien.Text = "0";
         }
 
-        public void FillData(HocPhi hp)
+        public void FillData(HocPhi hp, int month)
         {
-            lblAn.Text = FormatIntToString(hp.TienAn);
-            lblDien.Text = FormatIntToString(hp.TienDien);
-            lblHoc.Text = FormatIntToString(hp.TienHoc);
-            lblNuoc.Text = FormatIntToString(hp.TienNuoc);
-            lblTaiLieu.Text = FormatIntToString(hp.TienTaiLieu);
-            lblTTBi.Text = FormatIntToString(hp.TienTrangThietBi);
-            lblVeSinh.Text = FormatIntToString(hp.TienVeSinh);
-            lblTong.Text = FormatIntToString(hp.TongTien);
+            lblAn.Text = lblDonGia.Text = lblNgayH.Text = lblNgayN.Text = lblDien.Text = lblHoc.Text = lblNuoc.Text = lblTaiLieu.Text = lblTTBi.Text = lblVeSinh.Text = lblTong.Text = lblTien.Text = "";
+            if (month == DateTime.Now.Month)
+            {
+                lblAn.Text = FormatIntToString(hp.TongAn);
+                lblDonGia.Text = FormatIntToString(hp.TienAn);
+                lblNgayH.Text = hp.SoNgayHoc + " ngày";
+                lblNgayN.Text = 0 + " ngày";
+                lblDien.Text = FormatIntToString(hp.TienDien);
+                lblHoc.Text = FormatIntToString(hp.TienHoc);
+                lblNuoc.Text = FormatIntToString(hp.TienNuoc);
+                lblTaiLieu.Text = FormatIntToString(hp.TienTaiLieu);
+                lblTTBi.Text = FormatIntToString(hp.TienTrangThietBi);
+                lblVeSinh.Text = FormatIntToString(hp.TienVeSinh);
+                lblTong.Text = FormatIntToString(hp.TongTien - App.StudentSeclect.Tien);
+                lblTien.Text = FormatIntToString(App.StudentSeclect.Tien);
+                sloTien.IsVisible = true;
+            }
+            else
+            {
+                lblAn.Text = FormatIntToString(hp.TongAn - (hp.TienAn * NghiP));
+                lblDonGia.Text = FormatIntToString(hp.TienAn);
+                lblNgayH.Text = hp.SoNgayHoc + " ngày";
+                lblNgayN.Text = NghiP + " ngày";
+                lblDien.Text = FormatIntToString(hp.TienDien);
+                lblHoc.Text = FormatIntToString(hp.TienHoc);
+                lblNuoc.Text = FormatIntToString(hp.TienNuoc);
+                lblTaiLieu.Text = FormatIntToString(hp.TienTaiLieu);
+                lblTTBi.Text = FormatIntToString(hp.TienTrangThietBi);
+                lblVeSinh.Text = FormatIntToString(hp.TienVeSinh);
+                lblTong.Text = FormatIntToString(hp.TongTien - (hp.TienAn * NghiP));
+                sloTien.IsVisible = false;
+            }
         }
 
-        public string FormatIntToString(int value) => (value * 1000).ToString("N0");
+        public string FormatIntToString(int value)
+        {
+            if (value == 0)
+            {
+                return "0";
+            }
+            string str = (value * 1000).ToString("N0");
+            return str;
+        }
+
+        private void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
+        {
+            sloCTAn.IsVisible = !sloCTAn.IsVisible;
+        }
     }
 }

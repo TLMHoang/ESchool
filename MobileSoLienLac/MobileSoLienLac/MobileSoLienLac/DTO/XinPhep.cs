@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
@@ -100,5 +101,20 @@ namespace MobileSoLienLac.DTO
 
         #endregion
 
+    }
+
+    public class SortXinPhep : IComparer<XinPhep>
+    {
+        public int Compare(XinPhep x, XinPhep y)
+        {
+            if (x.NghiTu.CompareTo(y.NghiTu) == 0)
+            {
+                return x.TrangThai.CompareTo(y.TrangThai);
+            }
+            else
+            {
+                return x.NghiTu.CompareTo(y.NghiTu);
+            }
+        }
     }
 }

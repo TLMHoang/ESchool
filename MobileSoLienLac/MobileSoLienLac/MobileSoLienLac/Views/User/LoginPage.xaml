@@ -13,7 +13,7 @@
     </ContentPage.BackgroundImageSource>
     <ContentPage.Content>
         <StackLayout Margin="20">
-            <StackLayout VerticalOptions="EndAndExpand">
+            <StackLayout VerticalOptions="CenterAndExpand" TranslationY="100">
                 <!--TranslationY="{Binding Source={x:Reference btn_Login}, Path= Width}">-->
                 <!--input username in here-->
                     <controls:CustomEntry x:Name="Entry_Username"

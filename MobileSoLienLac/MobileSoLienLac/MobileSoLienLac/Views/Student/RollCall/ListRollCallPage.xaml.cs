@@ -36,6 +36,8 @@ namespace MobileSoLienLac.Views.Student.RollCall
             if (val.Error == 0)
             {
                 lst = val.ListT;
+                lst.Sort(new SortDiemDanh());
+                lst.Reverse();
             }
             else
             {

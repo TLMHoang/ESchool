@@ -12,7 +12,7 @@ namespace MobileSoLienLac.DTO
     {
         public int ID { get; set; }
         public int IDHocSinh { get; set; }
-        public DateTime? NgayNghi { get; set; }
+        public DateTime NgayNghi { get; set; }
         public byte Phep { get; set; }
 
         public DiemDanh()
@@ -79,6 +79,14 @@ namespace MobileSoLienLac.DTO
             }
 
             return val;
+        }
+    }
+
+    public class SortDiemDanh : IComparer<DiemDanh>
+    {
+        public int Compare(DiemDanh x, DiemDanh y)
+        {
+            return x.NgayNghi.CompareTo(y.NgayNghi);
         }
     }
 }

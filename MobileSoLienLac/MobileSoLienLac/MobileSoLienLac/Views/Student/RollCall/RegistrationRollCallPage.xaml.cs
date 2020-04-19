@@ -56,11 +56,14 @@ namespace MobileSoLienLac.Views.Student.RollCall
             Save = save;
             xp = val;
             FillData(val);
-            ViewPage(false);
-            if (val.NghiDen < date)
+            ViewPage(save);
+            if (!save)
             {
-                btnEdit.Text = "";
-                btnEdit.IsEnabled = save;
+                if (val.NghiDen < date)
+                {
+                    btnEdit.Text = "";
+                    btnEdit.IsEnabled = save;
+                }
             }
 
             #region Giới hạn set ngày

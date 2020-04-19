@@ -10,7 +10,10 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout x:Name="StackLayoutMain" >
-            <Picker x:Name="PickerChoose"
+            <Picker x:Name="PickerChooseTrue"
+                    IsVisible="False"
+                    Title="Chức năng"/>
+            <Picker x:Name="PickerChooseFalse"
                     IsVisible="False"
                     Title="Chức năng"/>
             <Label x:Name="lblNotify" Text="Không có xin phép nào"

@@ -39,7 +39,7 @@ namespace MobileSoLienLac.DTO
         {
             SoNgayHoc = Convert.IsDBNull(dr["SoNgayHoc"]) ? -1 : Convert.ToInt32(dr["SoNgayHoc"]);
             TienAn = Convert.IsDBNull(dr["TienAn"]) ? -1 : Convert.ToInt32(dr["TienAn"]);
-            TongAn = TienAn * (SoNgayHoc - NgayNghi);
+            TongAn = TienAn * SoNgayHoc;
             TienDien = Convert.IsDBNull(dr["TienDien"]) ? -1 : Convert.ToInt32(dr["TienDien"]);
             TienHoc = Convert.IsDBNull(dr["TienHoc"]) ? -1 : Convert.ToInt32(dr["TienHoc"]);
             TienNuoc = Convert.IsDBNull(dr["TienNuoc"]) ? -1 : Convert.ToInt32(dr["TienNuoc"]);

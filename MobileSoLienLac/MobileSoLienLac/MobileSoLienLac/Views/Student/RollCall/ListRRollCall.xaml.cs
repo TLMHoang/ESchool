@@ -37,24 +37,30 @@ namespace MobileSoLienLac.Views.Student.RollCall
             #region Tao MenuStrip bằng picker
 
             // tạo item 
-            List<ItemPicker> lstItemPickers = new List<ItemPicker>()
+            PickerChooseTrue.ItemsSource = new List<ItemPicker>()
             {
                 new ItemPicker(1, "Xem chi tiết"),
                 new ItemPicker(2, "Hủy xin phép")
             };
 
-            PickerChoose.ItemsSource = lstItemPickers;
-
-            PickerChoose.SelectedIndexChanged += async (sender, args) =>
+            PickerChooseFalse.ItemsSource = new List<ItemPicker>()
             {
-                if (PickerChoose.SelectedIndex != -1)
+                new ItemPicker(1, "Sửa xin phép"),
+                new ItemPicker(2, "Hủy xin phép")
+            };
+
+            #region Menu success
+
+            PickerChooseTrue.SelectedIndexChanged += async (sender, args) =>
+            {
+                if (PickerChooseTrue.SelectedIndex != -1)
                 {
-                    int ValInt = ((ItemPicker)PickerChoose.SelectedItem).ID;
+                    int ValInt = ((ItemPicker)PickerChooseTrue.SelectedItem).ID;
                     switch (ValInt)
                     {
                         case 1:
                             await Navigation.PushAsync(new RegistrationRollCallPage(ItemSelect, false));
-                            PickerChoose.SelectedIndex = -1;
+                            PickerChooseTrue.SelectedIndex = -1;
                             break;
                         case 2:
                         {
@@ -84,6 +90,60 @@ namespace MobileSoLienLac.Views.Student.RollCall
                                     "Đã gửi yêu cầu hủy xin phép cho GVCN, vui lòng đợi GVCN duyệt.",
                                     "OK");
                             }
+                            PickerChooseTrue.SelectedIndex = -1;
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+                }
+            };
+            
+
+            #endregion
+
+            #region Menu Wait success
+
+            PickerChooseFalse.SelectedIndexChanged += async (sender, args) =>
+            {
+                if (PickerChooseFalse.SelectedIndex != -1)
+                {
+                    int ValInt = ((ItemPicker)PickerChooseFalse.SelectedItem).ID;
+                    switch (ValInt)
+                    {
+                        case 1:
+                            await Navigation.PushAsync(new RegistrationRollCallPage(ItemSelect, true));
+                            PickerChooseFalse.SelectedIndex = -1;
+                            break;
+                        case 2:
+                        {
+                            if (ItemSelect.NghiTu <= DateTime.Now)
+                            {
+                                await DisplayAlert("Thông báo",
+                                    "Đơn này đa quá ngày yêu cầu hủy.\nChỉ có thể sử hoặc xem",
+                                    "OK");
+                                return;
+                            }
+                            int IntReturn = await ItemSelect.DeleteData(ItemSelect.ID);
+                            if (IntReturn == 0)
+                            {
+                                await DisplayAlert("Thông báo",
+                                    "Có lỗi xảy ra vui lòng thử lại",
+                                    "OK");
+                            }
+                            else if (IntReturn < 0)
+                            {
+                                await DisplayAlert("Thông báo",
+                                    new HandleError().IDErrorToNotify(IntReturn),
+                                    "OK");
+                            }
+                            else
+                            {
+                                await DisplayAlert("Thông báo",
+                                    "Đã gửi yêu cầu hủy xin phép cho GVCN, vui lòng đợi GVCN duyệt.",
+                                    "OK");
+                            }
+                            PickerChooseFalse.SelectedIndex = -1;
                             break;
                         }
                         default:
@@ -92,6 +152,7 @@ namespace MobileSoLienLac.Views.Student.RollCall
                 }
             };
 
+            #endregion
 
             #endregion
 
@@ -102,16 +163,26 @@ namespace MobileSoLienLac.Views.Student.RollCall
             }
             else
             {
+                lst.Sort(new SortXinPhep());
+                lst.Reverse();
                 ListViewRRollCall.ItemsSource = lst;
                 StackLayoutMain.Children.Remove(lblNotify);
             }
 
+            // event click item
             ListViewRRollCall.ItemSelected += async (sender, e) =>
             {
                 if (ListViewRRollCall.SelectedItem != null)
                 {
-                    ItemSelect = (XinPhep) ListViewRRollCall.SelectedItem;
-                    PickerChoose.Focus();
+                    ItemSelect = (XinPhep)ListViewRRollCall.SelectedItem;
+                    if (ItemSelect.TrangThai == 1)
+                    {
+                        PickerChooseTrue.Focus();
+                    }
+                    else
+                    {
+                        PickerChooseFalse.Focus();
+                    }
                 }
 
                 ListViewRRollCall.SelectionMode = ListViewSelectionMode.None;

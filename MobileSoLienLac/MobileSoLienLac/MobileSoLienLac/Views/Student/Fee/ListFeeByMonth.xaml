@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="MobileSoLienLac.Views.Student.Fee.ListFeeByMonth">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="White" HorizontalOptions="Fill">
             <Picker x:Name="PickerMonth"
                     Title="Chọn tháng"
                     HorizontalOptions="CenterAndExpand"/>
@@ -14,73 +14,182 @@
                    Text="Chi tiết" 
                    FontSize="Large"
                    HorizontalOptions="CenterAndExpand"/>
-            <ScrollView>
-                <StackLayout>
-                    <StackLayout Orientation="Horizontal">
+            <ScrollView HorizontalOptions="Fill">
+                <StackLayout HorizontalOptions="Fill">
+                    <Grid HorizontalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
                         <Label Text="Tiền học: "
+                               FontSize="Medium"/>
+                        <Label HorizontalOptions="Fill"
+                               HorizontalTextAlignment="End"
                                FontSize="Medium"
-                               />
-                        <Label HorizontalOptions="EndAndExpand"
-                               FontSize="Medium"
+                               Grid.Column="1"
                                x:Name="lblHoc"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Tiền ăn: "
-                               FontSize="Medium"
-                               />
-                        <Label HorizontalOptions="EndAndExpand"
-                               FontSize="Medium"
-                               x:Name="lblAn"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
+                    </Grid>
+                    <Frame Margin="0" Padding="0">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"></TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Grid HorizontalOptions="Fill">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Tiền ăn: "
+                                       FontSize="Medium"
+                                />
+                                <Label HorizontalOptions="Fill"
+                                       HorizontalTextAlignment="End"
+                                       FontSize="Medium"
+                                       x:Name="lblAn"
+                                       Grid.Column="1"/>
+                            </Grid>
+                            <StackLayout Margin="0" x:Name="sloCTAn" IsVisible="False">
+                                <Grid HorizontalOptions="Fill" Margin="20,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="Đơn giá: "
+                                           FontSize="Medium"/>
+                                    <Label HorizontalOptions="Fill"
+                                           HorizontalTextAlignment="End"
+                                           FontSize="Medium"
+                                           x:Name="lblDonGia"
+                                           Grid.Column="1"/>
+                                </Grid>
+                                <Grid HorizontalOptions="Fill" Margin="20,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="Số ngày học:"
+                                           FontSize="Medium"/>
+                                    <Label HorizontalOptions="Fill"
+                                           HorizontalTextAlignment="End"
+                                           FontSize="Medium"
+                                           x:Name="lblNgayH"
+                                           Grid.Column="1"/>
+                                </Grid>
+                                <Grid HorizontalOptions="Fill" Margin="20,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="Số ngày nghỉ(p):"
+                                           FontSize="Medium"/>
+                                    <Label HorizontalOptions="Fill"
+                                           HorizontalTextAlignment="End"
+                                           FontSize="Medium"
+                                           x:Name="lblNgayN"
+                                           Grid.Column="1"/>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <Grid HorizontalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <Label Text="Tiền điện: "
                                FontSize="Medium"
                                />
-                        <Label HorizontalOptions="EndAndExpand"
+                        <Label HorizontalOptions="Fill"
+                               HorizontalTextAlignment="End"
                                FontSize="Medium"
-                               x:Name="lblDien"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
+                               x:Name="lblDien"
+                               Grid.Column="1"/>
+                    </Grid>
+                    <Grid HorizontalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <Label Text="Tiền nước: "
                                FontSize="Medium"
                                />
-                        <Label HorizontalOptions="EndAndExpand"
+                        <Label HorizontalOptions="Fill"
+                               HorizontalTextAlignment="End"
                                FontSize="Medium"
-                               x:Name="lblNuoc"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
+                               x:Name="lblNuoc"
+                               Grid.Column="1"/>
+                    </Grid>
+                    <Grid HorizontalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <Label Text="Tiền tài liệu: "
                                FontSize="Medium"
                                />
-                        <Label HorizontalOptions="EndAndExpand"
+                        <Label HorizontalOptions="Fill"
+                               HorizontalTextAlignment="End"
                                FontSize="Medium"
-                               x:Name="lblTaiLieu"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
+                               x:Name="lblTaiLieu"
+                               Grid.Column="1"/>
+                    </Grid>
+                    <Grid HorizontalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <Label Text="Tiền ttb: "
                                FontSize="Medium"
                                />
-                        <Label HorizontalOptions="EndAndExpand"
+                        <Label HorizontalOptions="Fill"
+                               HorizontalTextAlignment="End"
                                FontSize="Medium"
-                               x:Name="lblTTBi"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
+                               x:Name="lblTTBi"
+                               Grid.Column="1"/>
+                    </Grid>
+                    <Grid HorizontalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <Label Text="Tiền vệ sinh: "
                                FontSize="Medium"
                                />
-                        <Label HorizontalOptions="EndAndExpand"
+                        <Label HorizontalOptions="Fill"
+                               HorizontalTextAlignment="End"
                                FontSize="Medium"
-                               x:Name="lblVeSinh"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
+                               x:Name="lblVeSinh"
+                               Grid.Column="1"/>
+                    </Grid>
+                    <Grid HorizontalOptions="Fill" x:Name="sloTien">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Tiền trong ID: "
+                               FontSize="Medium"
+                        />
+                        <Label HorizontalOptions="Fill"
+                               HorizontalTextAlignment="End"
+                               FontSize="Medium"
+                               x:Name="lblTien"
+                               Grid.Column="1"/>
+                    </Grid>
+                    <Grid HorizontalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <Label TextColor="Red"
                                FontSize="Medium"
                                Text="Tổng: "/>
-                        <Label HorizontalOptions="EndAndExpand"
+                        <Label HorizontalOptions="Fill"
+                               HorizontalTextAlignment="End"
                                TextColor="Red"
                                FontSize="Medium"
-                               x:Name="lblTong"/>
-                    </StackLayout>
+                               x:Name="lblTong"
+                               Grid.Column="1"/>
+                    </Grid>
                 </StackLayout>
             </ScrollView>
         </StackLayout>

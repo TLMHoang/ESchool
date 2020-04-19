@@ -30,6 +30,7 @@ namespace MobileSoLienLac.DTO
         public int HKI { get; set; }
         public int HKII { get; set; }
         public int CaNam { get; set; }
+        public int Tien { get; set; }
 
         public ThongTinHS()
         {
@@ -48,9 +49,10 @@ namespace MobileSoLienLac.DTO
             HKI = -1;
             HKII = -1;
             CaNam = -1;
+            Tien = -1;
         }
 
-        public ThongTinHS(int iD, string ten, DateTime ngaySinh, byte gioiTinh, string noiSinh, string danToc, string tonGiao, int idKhoi, int iDLop, string tenLop, string tenLoai, int iDLoaiHocSinh, int hKI, int hKII, int caNam)
+        public ThongTinHS(int iD, string ten, DateTime ngaySinh, byte gioiTinh, string noiSinh, string danToc, string tonGiao, int idKhoi, int iDLop, string tenLop, string tenLoai, int iDLoaiHocSinh, int hKI, int hKII, int caNam, int tien)
         {
             ID = iD;
             Ten = ten;
@@ -67,6 +69,7 @@ namespace MobileSoLienLac.DTO
             HKI = hKI;
             HKII = hKI;
             CaNam = caNam;
+            Tien = tien;
         }
 
         public ThongTinHS(DataRow dr)
@@ -86,6 +89,7 @@ namespace MobileSoLienLac.DTO
             HKI = Convert.IsDBNull(dr["HKI"]) ? -1 : Convert.ToInt32(dr["HKI"]);
             HKII = Convert.IsDBNull(dr["HKII"]) ? -1 : Convert.ToInt32(dr["HKII"]);
             CaNam = Convert.IsDBNull(dr["CaNam"]) ? -1 : Convert.ToInt32(dr["CaNam"]);
+            Tien = Convert.IsDBNull(dr["Tien"]) ? -1 : Convert.ToInt32(dr["Tien"]);
         }
 
         #region Handle value
