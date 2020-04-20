@@ -16,6 +16,7 @@ using MobileSoLienLac.Models.SQL;
 using MobileSoLienLac.Views;
 using MobileSoLienLac.ViewModels;
 using MobileSoLienLac.Views.Class;
+using MobileSoLienLac.Views.Student;
 using MobileSoLienLac.Views.Student.Fee;
 using MobileSoLienLac.Views.Student.RollCall;
 
@@ -71,9 +72,9 @@ namespace MobileSoLienLac.Views
             await Navigation.PushAsync(new ListStudentInClassPage());
         }
 
-        private void BtnSchedule_OnClicked(object sender, EventArgs e)
+        private async void BtnSchedule_OnClicked(object sender, EventArgs e)
         {
-            
+            await Navigation.PushAsync(new TimeTablePage());
         }
 
         //Event Xin phép nghỉ học

@@ -4,14 +4,261 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MobileSoLienLac.Views.Student.TimeTablePage">
+             x:Class="MobileSoLienLac.Views.Student.TimeTablePage"
+             BackgroundColor="White">
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-                <Label Text="Welcome to Xamarin.Forms!"
-                       VerticalOptions="CenterAndExpand" 
-                       HorizontalOptions="CenterAndExpand" />
-            </StackLayout>
-        </ScrollView>
+        <StackLayout>
+            <Label x:Name="lblNotify" Text="Không thể load được thời khóa biểu vui lòng kiểm tra lại mạng"></Label>
+            <ScrollView x:Name="scvTimeTable">
+                <StackLayout>
+                    <!-- Mon -->
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="frmThu2" Tapped="FrmThu2_OnTapped"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Thứ hai" HorizontalOptions="StartAndExpand" FontSize="Large"/>
+                                <Image x:Name="imgThu2" Source="more.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" Margin="0,0,10,0"/>
+                            </StackLayout>
+                            <ListView x:Name="lvThu2"
+                                  RowHeight="50"
+                                  HeightRequest="500"
+                                  SelectionMode="None"
+                                  IsVisible="False"
+                                  ItemTapped="ListView_OnItemTapped">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding Tiet, Converter={StaticResource ConvertIntToStringTiet}}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding TenMon}" FontSize="Medium"
+                                                       Grid.Column="1"
+                                                       Margin="10,0,0,0"/>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Frame>
+                    <!-- Tue -->
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="frmThu3" Tapped="FrmThu3_OnTapped"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Thứ ba" HorizontalOptions="StartAndExpand" FontSize="Large"/>
+                                <Image x:Name="imgThu3" Source="more.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" Margin="0,0,10,0"/>
+                            </StackLayout>
+                            <ListView x:Name="lvThu3"
+                                  RowHeight="50"
+                                  HeightRequest="500"
+                                  SelectionMode="None"
+                                  IsVisible="False"
+                                  ItemTapped="ListView_OnItemTapped">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding Tiet, Converter={StaticResource ConvertIntToStringTiet}}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding TenMon}" FontSize="Medium"
+                                                       Grid.Column="1"
+                                                       Margin="10,0,0,0"/>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Frame>
+                    <!-- wed -->
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="frmThu4" Tapped="FrmThu4_OnTapped"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Thứ tư" HorizontalOptions="StartAndExpand" FontSize="Large"/>
+                                <Image x:Name="imgThu4" Source="more.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" Margin="0,0,10,0"/>
+                            </StackLayout>
+                            <ListView x:Name="lvThu4"
+                                  RowHeight="50"
+                                  HeightRequest="500"
+                                  SelectionMode="None"
+                                  IsVisible="False"
+                                  ItemTapped="ListView_OnItemTapped">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding Tiet, Converter={StaticResource ConvertIntToStringTiet}}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding TenMon}" FontSize="Medium"
+                                                       Grid.Column="1"
+                                                       Margin="10,0,0,0"/>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Frame>
+                    <!-- Thu -->
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="frmThu5" Tapped="FrmThu5_OnTapped"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Thứ năm" HorizontalOptions="StartAndExpand" FontSize="Large"/>
+                                <Image x:Name="imgThu5" Source="more.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" Margin="0,0,10,0"/>
+                            </StackLayout>
+                            <ListView x:Name="lvThu5"
+                                  RowHeight="50"
+                                  HeightRequest="500"
+                                  SelectionMode="None"
+                                  IsVisible="False"
+                                  ItemTapped="ListView_OnItemTapped">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding Tiet, Converter={StaticResource ConvertIntToStringTiet}}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding TenMon}" FontSize="Medium"
+                                                       Grid.Column="1"
+                                                       Margin="10,0,0,0"/>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Frame>
+                    <!-- Fri -->
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="frmThu6" Tapped="FrmThu6_OnTapped"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Thứ sáu" HorizontalOptions="StartAndExpand" FontSize="Large"/>
+                                <Image x:Name="imgThu6" Source="more.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" Margin="0,0,10,0"/>
+                            </StackLayout>
+                            <ListView x:Name="lvThu6"
+                                  RowHeight="50"
+                                  HeightRequest="500"
+                                  SelectionMode="None"
+                                  IsVisible="False"
+                                  ItemTapped="ListView_OnItemTapped">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding Tiet, Converter={StaticResource ConvertIntToStringTiet}}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding TenMon}" FontSize="Medium"
+                                                       Grid.Column="1"
+                                                       Margin="10,0,0,0"/>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Frame>
+                    <!-- Sat -->
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="frmThu7" Tapped="FrmThu7_OnTapped"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Thứ bảy" HorizontalOptions="StartAndExpand" FontSize="Large"/>
+                                <Image x:Name="imgThu7" Source="more.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" Margin="0,0,10,0"/>
+                            </StackLayout>
+                            <ListView x:Name="lvThu7"
+                                  RowHeight="50"
+                                  HeightRequest="500"
+                                  SelectionMode="None"
+                                  IsVisible="False"
+                                  ItemTapped="ListView_OnItemTapped">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding Tiet, Converter={StaticResource ConvertIntToStringTiet}}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding TenMon}" FontSize="Medium"
+                                                       Grid.Column="1"
+                                                       Margin="10,0,0,0"/>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Frame>
+                    <!-- Sun -->
+                    <Frame VerticalOptions="Fill" >
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="frmThu" Tapped="FrmThu_OnTapped"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Chủ nhật" HorizontalOptions="StartAndExpand" FontSize="Large"/>
+                                <Image x:Name="imgThu" Source="more.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" Margin="0,0,10,0"/>
+                            </StackLayout>
+                            <ListView x:Name="lvThu"
+                                  RowHeight="50"
+                                  HeightRequest="500"
+                                  SelectionMode="None"
+                                  IsVisible="False"
+                                  ItemTapped="ListView_OnItemTapped">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding Tiet, Converter={StaticResource ConvertIntToStringTiet}}" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding TenMon}" FontSize="Medium"
+                                                       Grid.Column="1"
+                                                       Margin="10,0,0,0"/>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

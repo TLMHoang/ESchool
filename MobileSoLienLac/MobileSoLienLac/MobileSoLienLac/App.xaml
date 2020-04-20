@@ -24,6 +24,7 @@
             <converter:ConvertTrangThaiByteToString x:Key="ConvertTrangThaiByteToString"/>
             <converter:ConvertByteToColor x:Key="ConvertByteToColor"/>
             <converter:ConvertVangByteToString x:Key="ConvertVangByteToString"/>
+            <converter:ConvertIntToStringTiet x:Key="ConvertIntToStringTiet"/>
         </ResourceDictionary>
     </Application.Resources>
     
