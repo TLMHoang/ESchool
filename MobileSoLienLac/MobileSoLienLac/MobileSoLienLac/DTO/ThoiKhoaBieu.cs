@@ -25,7 +25,7 @@ namespace MobileSoLienLac.DTO
 
         public async Task<ValueDTO<ThoiKhoaBieu>> GetData(int IDLop)
         {
-            DataTableSQL dtSql = await ExecuteQuery("SelectThoiKhoaBieuv2",
+            DataTableSQL dtSql = await ExecuteQuery("m_SelectThoiKhoaBieu",
                 new SqlParameter("@IDLop", SqlDbType.Int) {Value = IDLop});
             ValueDTO<ThoiKhoaBieu> val = new ValueDTO<ThoiKhoaBieu>();
 

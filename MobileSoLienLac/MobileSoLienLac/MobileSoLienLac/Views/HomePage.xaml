@@ -81,6 +81,12 @@
                             ContentLayout="Top"
                             BackgroundColor="White"
                             Clicked="BtnListRollCall_OnClicked"/>
+                    <Button x:Name="btnPoint"
+                            Grid.Row="2" Grid.Column="2" 
+                            Text="Điểm số" 
+                            Image="hat.png" ContentLayout="Top"
+                            BackgroundColor="White"
+                            Clicked="BtnPoint_OnClicked"/>
                     <!--<Button Grid.Row="0" Grid.Column="1" 
                     Text="" 
                     Image="" ContentLayout="Top"

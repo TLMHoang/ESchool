@@ -4,8 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MobileSoLienLac.Views.Student.TimeTablePage"
-             BackgroundColor="White">
+             x:Class="MobileSoLienLac.Views.Student.TimeTablePage">
     <ContentPage.Content>
         <StackLayout>
             <Label x:Name="lblNotify" Text="Không thể load được thời khóa biểu vui lòng kiểm tra lại mạng"></Label>

@@ -87,5 +87,10 @@ namespace MobileSoLienLac.Views
         {
             await Navigation.PushAsync(new ListRollCallPage());
         }
+
+        private async void BtnPoint_OnClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new PointPage());
+        }
     }
 }

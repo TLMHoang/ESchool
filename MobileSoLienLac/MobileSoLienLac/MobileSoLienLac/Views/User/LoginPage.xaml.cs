@@ -77,11 +77,29 @@ namespace MobileSoLienLac.Views
             }
         }
 
+        public async Task<bool> LoadSubject()
+        {
+            ValueDTO<MonHoc> val = await new MonHoc().GetData();
+            if (val.Error != 0)
+            {
+                await DisplayAlert("Thông báo", error.IDErrorToNotify(val.Error), "OK");
+                btn_Login.IsEnabled = true;
+                App.ResetSource();
+                return false;
+            }
+            else
+            {
+                App.lstMonHocs = val.ListT;
+                return true;
+            }
+        }
+
         public async Task<bool> LoadDataInDatabase()
         {
             if (!(await LoadLink())) return false;
             if (!(await LoadConduct())) return false;
             if (!(await LoadSpeciesPoint())) return false;
+            if (!(await LoadSubject())) return false;
 
             foreach (LienKetPHvsHS i in App.lstPHvsHs)
             {

@@ -97,6 +97,11 @@ namespace MobileSoLienLac.DTO
 
         public override string ToString() => Ten + " - " + TenLop;
 
+        public string FistName()
+        {
+            return Ten.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Last();
+        }
+
         #endregion
 
 

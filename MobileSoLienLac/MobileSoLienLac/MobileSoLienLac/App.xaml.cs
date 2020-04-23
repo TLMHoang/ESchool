@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using MobileSoLienLac.Services;
 using MobileSoLienLac.Views;
+using MobileSoLienLac.Views.Student;
 
 namespace MobileSoLienLac
 {
@@ -18,9 +19,9 @@ namespace MobileSoLienLac
         public static ThongTinHS StudentSeclect;
         public static List<LoaiDiem> lstLoaiDiems = new List<LoaiDiem>();
         public static List<LoaiHanhKiem> lstLoaiHanhKiems = new List<LoaiHanhKiem>();
+        public static List<MonHoc> lstMonHocs = new List<MonHoc>();
 
         public static int IDAccount;
-        public static bool DakMode;
         #endregion
         public App()
         {
@@ -39,6 +40,7 @@ namespace MobileSoLienLac
             StudentSeclect = new ThongTinHS();
             lstLoaiDiems = new List<LoaiDiem>();
             lstLoaiHanhKiems = new List<LoaiHanhKiem>();
+            lstMonHocs = new List<MonHoc>();
 
             IDAccount = -1;
         }
