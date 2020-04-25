@@ -48,10 +48,11 @@
                             
                     </Grid>
                     <Button x:Name="btn_Login"
-                    Text="Đăng nhập"
-                    VerticalOptions="Center"
-                        HorizontalOptions="CenterAndExpand"
-                    Clicked="btn_Login_Clicked"/>
+                            Text="Đăng nhập"
+                            VerticalOptions="Center"
+                            HorizontalOptions="CenterAndExpand"
+                            Clicked="btn_Login_Clicked"
+                            Margin="0,20,0,0"/>
                     </StackLayout>
             <!--<Button x:Name="btn_Close"
                         Text="Thoát"

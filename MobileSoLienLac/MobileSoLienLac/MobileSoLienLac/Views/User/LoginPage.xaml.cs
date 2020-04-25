@@ -140,6 +140,7 @@ namespace MobileSoLienLac.Views
                         if (await LoadDataInDatabase())
                         {
                             await DisplayAlert("Thông báo", "Đăng nhập thành công", "Ok");
+                            App.lstLoaiDiems.Sort(new SortLoaiDiem());
                             Application.Current.MainPage = new MainPage();
                         }
                         else

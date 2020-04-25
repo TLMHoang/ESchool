@@ -25,6 +25,7 @@
             <converter:ConvertByteToColor x:Key="ConvertByteToColor"/>
             <converter:ConvertVangByteToString x:Key="ConvertVangByteToString"/>
             <converter:ConvertIntToStringTiet x:Key="ConvertIntToStringTiet"/>
+            <converter:ConvertPointToColor x:Key="ConvertPointToColor"/>
         </ResourceDictionary>
     </Application.Resources>
     

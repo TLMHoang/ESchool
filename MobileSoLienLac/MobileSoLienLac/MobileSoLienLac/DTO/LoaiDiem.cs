@@ -55,4 +55,12 @@ namespace MobileSoLienLac.DTO
 
         #endregion
     }
+
+    public class SortLoaiDiem:IComparer<LoaiDiem>
+    {
+        public int Compare(LoaiDiem x, LoaiDiem y)
+        {
+            return x.ID.CompareTo(y.ID);
+        }
+    }
 }

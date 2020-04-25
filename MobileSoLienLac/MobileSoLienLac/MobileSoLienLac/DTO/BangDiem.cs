@@ -11,8 +11,7 @@ namespace MobileSoLienLac.DTO
     public class BangDiem : Helper
     {
         public int IDLoaiDiem { get; set; }
-        public string TenLoaiDiem { get; set; }
-        public byte He { get; set; }
+        //public string TenLoaiDiem { get; set; }
         public int IDMonHoc { get; set; }
         public double Diem { get; set; }
         public DateTime NgayNhap { get; set; }
@@ -24,7 +23,7 @@ namespace MobileSoLienLac.DTO
         {
             IDLoaiDiem = Convert.IsDBNull(dr["IDLoaiDiem"]) ? -1 : Convert.ToInt32(dr["IDLoaiDiem"]);
             IDMonHoc = Convert.IsDBNull(dr["IDMonHoc"]) ? -1 : Convert.ToInt32(dr["IDMonHoc"]);
-            TenLoaiDiem = dr["TenLoaiDiem"].ToString();
+            //TenLoaiDiem = dr["TenLoaiDiem"].ToString();
             Diem = Convert.ToDouble(dr["Diem"]);
             NgayNhap = Convert.ToDateTime(dr["NgayNhap"]);
             HocKyI = Convert.ToByte(dr["HocKyI"]);
@@ -33,8 +32,7 @@ namespace MobileSoLienLac.DTO
         public BangDiem(int iDLoaiDiem, string tenLoaiDiem, byte he, int iDMonHoc, double diem, DateTime ngayNhap, byte hocKyI)
         {
             IDLoaiDiem = iDLoaiDiem;
-            TenLoaiDiem = tenLoaiDiem;
-            He = he;
+            //TenLoaiDiem = tenLoaiDiem;
             IDMonHoc = iDMonHoc;
             Diem = diem;
             NgayNhap = ngayNhap;

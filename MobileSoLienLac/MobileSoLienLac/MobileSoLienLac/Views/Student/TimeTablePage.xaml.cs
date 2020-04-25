@@ -18,6 +18,9 @@ namespace MobileSoLienLac.Views.Student
         public TimeTablePage()
         {
             InitializeComponent();
+
+            Title = "Thời khóa biểu lớp - " + App.StudentSeclect.TenLop;
+
             GetList();
             if (lst.Count == 0)
             {
@@ -43,7 +46,10 @@ namespace MobileSoLienLac.Views.Student
 
                 foreach (ThoiKhoaBieu Item in val.ListT)
                 {
-                    lst[Item.Thu - 1].Add(Item);
+                    if (!Item.TenMon.Equals("Trống"))
+                    {
+                        lst[Item.Thu - 1].Add(Item);
+                    }
                 }
             }
         }

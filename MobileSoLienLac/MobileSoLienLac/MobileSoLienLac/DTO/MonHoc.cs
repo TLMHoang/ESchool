@@ -47,6 +47,8 @@ namespace MobileSoLienLac.DTO
 
             return val;
         }
+
+        public override string ToString() => TenMon;
     }
 
     public class SortMonHoc : IComparer<MonHoc>

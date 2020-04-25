@@ -92,5 +92,10 @@ namespace MobileSoLienLac.Views
         {
             await Navigation.PushAsync(new PointPage());
         }
+
+        private async void BtnSummary_OnClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SummaryPage());
+        }
     }
 }

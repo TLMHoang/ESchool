@@ -22,7 +22,7 @@
                             </StackLayout>
                             <ListView x:Name="lvThu2"
                                   RowHeight="50"
-                                  HeightRequest="500"
+                                  
                                   SelectionMode="None"
                                   IsVisible="False"
                                   ItemTapped="ListView_OnItemTapped">
@@ -57,7 +57,7 @@
                             </StackLayout>
                             <ListView x:Name="lvThu3"
                                   RowHeight="50"
-                                  HeightRequest="500"
+                                  
                                   SelectionMode="None"
                                   IsVisible="False"
                                   ItemTapped="ListView_OnItemTapped">
@@ -92,7 +92,6 @@
                             </StackLayout>
                             <ListView x:Name="lvThu4"
                                   RowHeight="50"
-                                  HeightRequest="500"
                                   SelectionMode="None"
                                   IsVisible="False"
                                   ItemTapped="ListView_OnItemTapped">
@@ -127,7 +126,6 @@
                             </StackLayout>
                             <ListView x:Name="lvThu5"
                                   RowHeight="50"
-                                  HeightRequest="500"
                                   SelectionMode="None"
                                   IsVisible="False"
                                   ItemTapped="ListView_OnItemTapped">
@@ -162,7 +160,6 @@
                             </StackLayout>
                             <ListView x:Name="lvThu6"
                                   RowHeight="50"
-                                  HeightRequest="500"
                                   SelectionMode="None"
                                   IsVisible="False"
                                   ItemTapped="ListView_OnItemTapped">
@@ -197,7 +194,6 @@
                             </StackLayout>
                             <ListView x:Name="lvThu7"
                                   RowHeight="50"
-                                  HeightRequest="500"
                                   SelectionMode="None"
                                   IsVisible="False"
                                   ItemTapped="ListView_OnItemTapped">
@@ -232,7 +228,6 @@
                             </StackLayout>
                             <ListView x:Name="lvThu"
                                   RowHeight="50"
-                                  HeightRequest="500"
                                   SelectionMode="None"
                                   IsVisible="False"
                                   ItemTapped="ListView_OnItemTapped">

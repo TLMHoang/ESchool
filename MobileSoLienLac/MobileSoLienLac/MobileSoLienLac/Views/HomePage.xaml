@@ -20,81 +20,92 @@
         <ScrollView>
             <Grid x:Name="MapMain" 
                   Margin="0"
-              Padding="0">
-                    <Grid.RowDefinitions >
-                        <RowDefinition Height="120"/>
-                        <RowDefinition Height="120"/>
-                        <RowDefinition Height="120"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
+                  Padding="0">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="120"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
                 <Button x:Name="btnNotify"
-                    Grid.Row="0" Grid.Column="0" 
-                    Text="Thông báo" 
-                    Image="bell.png" ContentLayout="Top"
-                    BackgroundColor="White"
-                    Clicked="BtnNotify_OnClicked"/>
-                    <Button x:Name="btnListTeacher"
-                    Grid.Row="0" Grid.Column="1" 
-                    Text="Danh sách giao viên" 
-                    Image="superviseduser.png" ContentLayout="Top"
-                    BackgroundColor="White"
-                    Clicked="BtnListTeacher_OnClicked" />
-                    <Button x:Name="btnStudent"
-                    Grid.Row="0" Grid.Column="2" 
-                    Text="Thông tin học sinh"
-                    Image="assignment.png" ContentLayout="Top"
-                    BackgroundColor="White"
-                    Clicked="BtnStudent_OnClicked"/>
-                    <Button x:Name="btnFee"
-                    Grid.Row="1" Grid.Column="0" 
-                    Text="Học Phí" 
-                    Image="money.png" ContentLayout="Top"
-                    BackgroundColor="White"
-                    Clicked="BtnFee_OnClicked"/>
-                    <Button x:Name="btnListStudent"
-                    Grid.Row="1" Grid.Column="1" 
-                    Text="Danh sách học sinh" 
-                    Image="supervisedaccount.png" ContentLayout="Top"
-                    BackgroundColor="White"
-                    Clicked="BtnListStudent_OnClicked"/>
-                    <Button x:Name="btnSchedule"
-                    Grid.Row="1" Grid.Column="2" 
-                    Text="Thời khóa biểu" 
-                    Image="daterange.png" ContentLayout="Top"
-                    BackgroundColor="White"
-                    Clicked="BtnSchedule_OnClicked"/>
-                    <Button Grid.Row="2" Grid.Column="0" 
-                            Text="Xin phép" 
-                            x:Name="btnRRollCall"
-                            Image="eventavailable.png" 
-                            ContentLayout="Top"
-                            BackgroundColor="White"
-                            Clicked="BtnRRollCall_OnClicked"/>
-                    <Button Grid.Row="2" Grid.Column="1" 
-                            Text="Điểm danh" 
-                            x:Name="btnListRollCall"
-                            Image="eventbusy.png" 
-                            ContentLayout="Top"
-                            BackgroundColor="White"
-                            Clicked="BtnListRollCall_OnClicked"/>
-                    <Button x:Name="btnPoint"
-                            Grid.Row="2" Grid.Column="2" 
-                            Text="Điểm số" 
-                            Image="hat.png" ContentLayout="Top"
-                            BackgroundColor="White"
-                            Clicked="BtnPoint_OnClicked"/>
-                    <!--<Button Grid.Row="0" Grid.Column="1" 
+                        Grid.Row="0" Grid.Column="0" 
+                        Text="Thông báo" 
+                        Image="bell.png" ContentLayout="Top"
+                        BackgroundColor="White"
+                        Clicked="BtnNotify_OnClicked"/>
+                <Button x:Name="btnListTeacher"
+                        Grid.Row="0" Grid.Column="1" 
+                        Text="Danh sách giao viên" 
+                        Image="superviseduser.png" ContentLayout="Top"
+                        BackgroundColor="White"
+                        Clicked="BtnListTeacher_OnClicked" />
+                <Button x:Name="btnStudent"
+                        Grid.Row="0" Grid.Column="2" 
+                        Text="Thông tin học sinh"
+                        Image="assignment.png" ContentLayout="Top"
+                        BackgroundColor="White"
+                        Clicked="BtnStudent_OnClicked"/>
+                <Button x:Name="btnFee"
+                        Grid.Row="1" Grid.Column="0" 
+                        Text="Học Phí" 
+                        Image="money.png" ContentLayout="Top"
+                        BackgroundColor="White"
+                        Clicked="BtnFee_OnClicked"/>
+                <Button x:Name="btnListStudent"
+                        Grid.Row="1" Grid.Column="1" 
+                        Text="Danh sách học sinh" 
+                        Image="supervisedaccount.png" ContentLayout="Top"
+                        BackgroundColor="White"
+                        Clicked="BtnListStudent_OnClicked"/>
+                <Button x:Name="btnSchedule"
+                        Grid.Row="1" Grid.Column="2" 
+                        Text="Thời khóa biểu" 
+                        Image="daterange.png" ContentLayout="Top"
+                        BackgroundColor="White"
+                        Clicked="BtnSchedule_OnClicked"/>
+                <Button Grid.Row="2" Grid.Column="0" 
+                        Text="Xin phép" 
+                        x:Name="btnRRollCall"
+                        Image="eventavailable.png" 
+                        ContentLayout="Top"
+                        BackgroundColor="White"
+                        Clicked="BtnRRollCall_OnClicked"/>
+                <Button Grid.Row="2" Grid.Column="1" 
+                        Text="Điểm danh" 
+                        x:Name="btnListRollCall"
+                        Image="eventbusy.png" 
+                        ContentLayout="Top"
+                        BackgroundColor="White"
+                        Clicked="BtnListRollCall_OnClicked"/>
+                <Button x:Name="btnPoint"
+                        Grid.Row="2" Grid.Column="2" 
+                        Text="Điểm số" 
+                        Image="hat.png" ContentLayout="Top"
+                        BackgroundColor="White"
+                        Clicked="BtnPoint_OnClicked"/>
+                <Button x:Name="btnSummary"
+                        Grid.Row="3" Grid.Column="0" 
+                        Text="Tổng kết" 
+                        Image="" ContentLayout="Top"
+                        BackgroundColor="White"
+                        Clicked="BtnSummary_OnClicked"/>
+                <Button x:Name="btnHealthInsurance"
+                        Grid.Row="0" Grid.Column="1" 
+                        Text="Bảo hiểm y tế" 
+                        Image="" ContentLayout="Top"
+                        BackgroundColor="White"
+                        Clicked="BtnSummary_OnClicked"/>
+                <!--<Button Grid.Row="0" Grid.Column="1" 
                     Text="" 
                     Image="" ContentLayout="Top"
                     BackgroundColor="White"
                     Clicked= />-->
                 </Grid>
         </ScrollView>
-
     </StackLayout>
-
 </ContentPage>

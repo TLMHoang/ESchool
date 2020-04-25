@@ -4,11 +4,231 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MobileSoLienLac.Views.Student.PointPage">
+             x:Class="MobileSoLienLac.Views.Student.PointPage"
+             x:Name="ContentPagePoint">
     <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="lblNotify" Text="Không Load được dữ liêu hoặc không có dư liệu. Vui lòng thử lại" FontSize="Large"/>
-            <StackLayout x:Name="LayoutMain"/>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Label x:Name="lblNotify" Text="Không Load được dữ liêu hoặc không có dư liệu. Vui lòng thử lại" FontSize="Large"/>
+                <Picker x:Name="pkrSubject" Title="Môn học" 
+                        WidthRequest="120"
+                        HorizontalOptions="CenterAndExpand"/>
+                <StackLayout>
+                    <!--Học Kỳ I-->
+                    <StackLayout Margin="15,30,15,0">
+                        <StackLayout Orientation="Horizontal" >
+                            <Label Text="Học kỳ I" FontSize="Large"/>
+                            <Label Text="{Binding DTBI}" 
+                                   TextColor="Red"
+                                   FontSize="Medium"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalOptions="EndAndExpand"
+                                   HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <Grid Margin="15,0,15,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="3.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!-- Miệng -->
+                            <Label Text="Miệng:" Margin="10,0,0,0" FontSize="Medium"
+                                   Grid.Column="0" Grid.Row="0"/>
+                            <ScrollView Orientation="Both"
+                                        Grid.Column="1" Grid.Row="0">
+                                <FlexLayout BindableLayout.ItemsSource="{Binding SemesterI.Mieng}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Diem}" 
+                                                   BackgroundColor="{Binding Diem, Converter={StaticResource ConvertPointToColor}}"
+                                                   HorizontalOptions="CenterAndExpand" 
+                                                   VerticalOptions="CenterAndExpand"  
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"
+                                                   WidthRequest="40"/>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </ScrollView>
+                            <!-- 15P -->
+                            <Label Text="15 phút:" Margin="10,0,0,0" FontSize="Medium"
+                                   Grid.Column="0" Grid.Row="1"/>
+                            <ScrollView Orientation="Both"
+                                        Grid.Column="1" Grid.Row="1">
+                                <FlexLayout BindableLayout.ItemsSource="{Binding SemesterI.Phut}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Diem}" 
+                                                   BackgroundColor="{Binding Diem, Converter={StaticResource ConvertPointToColor}}"
+                                                   HorizontalOptions="CenterAndExpand" 
+                                                   VerticalOptions="CenterAndExpand"  
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"
+                                                   WidthRequest="40"/>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </ScrollView>
+                            <!-- 1T -->
+                            <Label Text="1 tiết:" Margin="10,0,0,0" FontSize="Medium"
+                                   Grid.Column="0" Grid.Row="2"/>
+                            <ScrollView Orientation="Both"
+                                        Grid.Column="1" Grid.Row="2">
+                                <FlexLayout BindableLayout.ItemsSource="{Binding SemesterI.Tiet}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Diem}" 
+                                                   BackgroundColor="{Binding Diem, Converter={StaticResource ConvertPointToColor}}"
+                                                   HorizontalOptions="CenterAndExpand" 
+                                                   VerticalOptions="CenterAndExpand"  
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"
+                                                   WidthRequest="40"/>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </ScrollView>
+                            <!-- HK -->
+                            <Label Text="Học kỳ:" Margin="10,0,0,0" FontSize="Medium"
+                                   Grid.Column="0" Grid.Row="3"/>
+                            <ScrollView Orientation="Both"
+                                        Grid.Column="1" Grid.Row="3">
+                                <FlexLayout BindableLayout.ItemsSource="{Binding SemesterI.HocKy}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Diem}" 
+                                                   BackgroundColor="{Binding Diem, Converter={StaticResource ConvertPointToColor}}"
+                                                   HorizontalOptions="CenterAndExpand" 
+                                                   VerticalOptions="CenterAndExpand"  
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"
+                                                   WidthRequest="40"/>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </ScrollView>
+                        </Grid>
+                    </StackLayout>
+                    <!--Học Kỳ II-->
+                    <StackLayout Margin="15,30,15,0">
+                        <StackLayout Orientation="Horizontal" >
+                            <Label Text="Học kỳ II" FontSize="Large"/>
+                            <Label Text="{Binding DTBII}" 
+                                   TextColor="Red"
+                                   FontSize="Medium"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalOptions="EndAndExpand"
+                                   HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                        <Grid Margin="15,0,15,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="3.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!-- Miệng -->
+                            <Label Text="Miệng:" Margin="10,0,0,0" FontSize="Medium"
+                                   Grid.Column="0" Grid.Row="0"/>
+                            <ScrollView Orientation="Both"
+                                        Grid.Column="1" Grid.Row="0">
+                                <FlexLayout BindableLayout.ItemsSource="{Binding SemesterII.Mieng}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Diem}" 
+                                                   BackgroundColor="{Binding Diem, Converter={StaticResource ConvertPointToColor}}"
+                                                   HorizontalOptions="CenterAndExpand" 
+                                                   VerticalOptions="CenterAndExpand"  
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"
+                                                   WidthRequest="40"/>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </ScrollView>
+                            <!-- 15P -->
+                            <Label Text="15 phút:" Margin="10,0,0,0" FontSize="Medium"
+                                   Grid.Column="0" Grid.Row="1"/>
+                            <ScrollView Orientation="Both"
+                                        Grid.Column="1" Grid.Row="1">
+                                <FlexLayout BindableLayout.ItemsSource="{Binding SemesterII.Phut}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Diem}" 
+                                                   BackgroundColor="{Binding Diem, Converter={StaticResource ConvertPointToColor}}"
+                                                   HorizontalOptions="CenterAndExpand" 
+                                                   VerticalOptions="CenterAndExpand"  
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"
+                                                   WidthRequest="40"/>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </ScrollView>
+                            <!-- 1T -->
+                            <Label Text="1 tiết:" Margin="10,0,0,0" FontSize="Medium"
+                                   Grid.Column="0" Grid.Row="2"/>
+                            <ScrollView Orientation="Both"
+                                        Grid.Column="1" Grid.Row="2">
+                                <FlexLayout BindableLayout.ItemsSource="{Binding SemesterII.Tiet}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Diem}" 
+                                                   BackgroundColor="{Binding Diem, Converter={StaticResource ConvertPointToColor}}"
+                                                   HorizontalOptions="CenterAndExpand" 
+                                                   VerticalOptions="CenterAndExpand"  
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"
+                                                   WidthRequest="40"/>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </ScrollView>
+                            <!-- HK -->
+                            <Label Text="Học kỳ:" Margin="10,0,0,0" FontSize="Medium"
+                                   Grid.Column="0" Grid.Row="3"/>
+                            <ScrollView Orientation="Both"
+                                        Grid.Column="1" Grid.Row="3">
+                                <FlexLayout BindableLayout.ItemsSource="{Binding SemesterII.HocKy}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Text="{Binding Diem}" 
+                                                   BackgroundColor="{Binding Diem, Converter={StaticResource ConvertPointToColor}}"
+                                                   HorizontalOptions="CenterAndExpand" 
+                                                   VerticalOptions="CenterAndExpand"  
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"
+                                                   WidthRequest="40"/>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </ScrollView>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+                <!--<StackLayout Orientation="Horizontal"
+                             HeightRequest="100"
+                             BackgroundColor="Red"
+                             BindableLayout.ItemsSource="{Binding Data}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="White">
+                                <Label Text="{Binding Diem}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>-->
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
