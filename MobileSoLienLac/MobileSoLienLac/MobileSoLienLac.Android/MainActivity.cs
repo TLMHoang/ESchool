@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Plugin.Toasts;
+using Xamarin.Forms;
 
 namespace MobileSoLienLac.Droid
 {
@@ -16,6 +18,9 @@ namespace MobileSoLienLac.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+
+            DependencyService.Register<ToastNotification>();
+            ToastNotification.Init(this);
 
             base.OnCreate(savedInstanceState);
 

@@ -10,7 +10,7 @@
              BackgroundColor="White"
              >
 
-    <StackLayout HorizontalOptions="Fill">
+    <StackLayout HorizontalOptions="Fill" x:Name="StackLayoutMain">
         <Picker x:Name="PickerChooseStudent"
                 Grid.Row="0" Grid.Column="1"
                 Title="Chọn học sinh"
@@ -91,15 +91,15 @@
                 <Button x:Name="btnSummary"
                         Grid.Row="3" Grid.Column="0" 
                         Text="Tổng kết" 
-                        Image="" ContentLayout="Top"
+                        Image="insertchart.png" ContentLayout="Top"
                         BackgroundColor="White"
                         Clicked="BtnSummary_OnClicked"/>
                 <Button x:Name="btnHealthInsurance"
-                        Grid.Row="0" Grid.Column="1" 
-                        Text="Bảo hiểm y tế" 
-                        Image="" ContentLayout="Top"
+                        Grid.Row="3" Grid.Column="1" 
+                        Text="Đăng ký BHYT" 
+                        Image="tab.png" ContentLayout="Top"
                         BackgroundColor="White"
-                        Clicked="BtnSummary_OnClicked"/>
+                        Clicked="BtnHealthInsurance_OnClicked"/>
                 <!--<Button Grid.Row="0" Grid.Column="1" 
                     Text="" 
                     Image="" ContentLayout="Top"
@@ -107,5 +107,8 @@
                     Clicked= />-->
                 </Grid>
         </ScrollView>
+        <Picker x:Name="pkrDKBHYT"
+                IsVisible="False"
+                Title="Bảo hiểm y tế"/>
     </StackLayout>
 </ContentPage>

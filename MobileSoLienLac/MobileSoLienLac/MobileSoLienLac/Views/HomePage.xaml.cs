@@ -28,13 +28,15 @@ namespace MobileSoLienLac.Views
     public partial class ItemsPage : ContentPage
     {
         HomeViewModel viewModel;
+        FunctionOrder funcBHYT = new FunctionOrder();
+        private bool bhyt = true;
 
-        
-        
         public ItemsPage()
         {
             InitializeComponent();
 
+            CheckbtnBHYT();
+            EditNameBtnHealthInsurance();
 
             BindingContext = viewModel = new HomeViewModel(BrowseItemsPage.Height);
 
@@ -43,9 +45,60 @@ namespace MobileSoLienLac.Views
             PickerChooseStudent.SelectedIndexChanged += (sender, e) =>
             {
                 App.StudentSeclect = (ThongTinHS)PickerChooseStudent.SelectedItem;
+                EditNameBtnHealthInsurance();
             };
 
         }
+
+        public async void CheckbtnBHYT()
+        {
+            funcBHYT = (await funcBHYT.GetData()).ListT[0];
+            DateTime date = DateTime.Now;
+            if (date < funcBHYT.StartDate || date > funcBHYT.EndDate)
+            {
+                btnHealthInsurance.IsVisible = false;
+                StackLayoutMain.Children.Remove(pkrDKBHYT);
+                bhyt = false;
+            }
+            else
+            {
+                bhyt = true;
+                pkrDKBHYT.ItemsSource = new string[]
+                {
+                    "Đăng ký bảo hiểm y tế.",
+                    "Đã có bảo hiểm quân đội của cha mẹ."
+                };
+            }
+            
+        }
+
+        public void EditNameBtnHealthInsurance()
+        {
+            if (!bhyt)
+            {
+                return;
+            }
+            else
+            {
+                if (App.StudentSeclect.BHQD == 1)
+                {
+                    btnHealthInsurance.Text = "Hủy BH Quân đội";
+                }
+                else
+                {
+                    if (App.StudentSeclect.DangKy == 1)
+                    {
+                        btnHealthInsurance.Text = "Hủy BHYT";
+                    }
+                    else
+                    {
+                        btnHealthInsurance.Text = "Đăng ký BHYT";
+                    }
+                }
+            }
+        }
+
+        #region Event Button
 
         private async void BtnNotify_OnClicked(object sender, EventArgs e)
         {
@@ -97,5 +150,24 @@ namespace MobileSoLienLac.Views
         {
             await Navigation.PushAsync(new SummaryPage());
         }
+
+        private async void BtnHealthInsurance_OnClicked(object sender, EventArgs e)
+        {
+            if (btnHealthInsurance.Text.Equals("Hủy BHYT"))
+            {
+                await DisplayAlert("Thông báo", "Huy BHYT", "OK");
+            }
+            else if (btnHealthInsurance.Text.Equals("Hủy BH Quân đội"))
+            {
+                await DisplayAlert("Thông báo", "Huy BHQD", "OK");
+
+            }
+            else
+            {
+                pkrDKBHYT.Focus();
+            }
+        }
+
+        #endregion
     }
 }

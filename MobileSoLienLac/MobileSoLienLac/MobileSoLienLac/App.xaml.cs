@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.SqlClient;
 using MobileSoLienLac.DTO;
 using MobileSoLienLac.Models;
+using MobileSoLienLac.Models.SQL;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using MobileSoLienLac.Services;
 using MobileSoLienLac.Views;
 using MobileSoLienLac.Views.Student;
+using System.Security.Permissions;
+using MobileSoLienLac.Views.Notify;
 
 namespace MobileSoLienLac
 {
@@ -21,16 +26,19 @@ namespace MobileSoLienLac
         public static List<LoaiHanhKiem> lstLoaiHanhKiems = new List<LoaiHanhKiem>();
         public static List<MonHoc> lstMonHocs = new List<MonHoc>();
 
+        //public delegate void LoadNotify();
+        //public event LoadNotify OnLoadNotify;
+
         public static int IDAccount;
         #endregion
         public App()
         {
             InitializeComponent();
 
-            
 
             DependencyService.Register<MockDataStore>();
             MainPage = new Login();
+            //MainPage = new TestNotify();
         }
 
         public static void ResetSource()
@@ -45,9 +53,21 @@ namespace MobileSoLienLac
             IDAccount = -1;
         }
 
+        //public void Main_OnLoadNoyify()
+        //{
+        //    ISynchronizeInvoke i = (ISynchronizeInvoke)this;
+        //    if (i.InvokeRequired)//tab
+        //    {
+        //        LoadNotify dd = new LoadNotify(Main_OnLoadNoyify);
+        //        i.BeginInvoke(dd, null);
+        //        return;
+        //    }
+        //}
+
         protected override void OnStart()
         {
-            
+            //SqlDependency.Stop(new Helper().connStr);
+            //SqlDependency.Start(new Helper().connStr);
         }
 
         protected override void OnSleep()

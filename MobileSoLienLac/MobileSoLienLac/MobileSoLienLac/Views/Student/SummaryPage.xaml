@@ -7,9 +7,22 @@
              x:Class="MobileSoLienLac.Views.Student.SummaryPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding HKI, Converter={StaticResource ConvertIntToLoaiHanhKiem}}"/>
-            <Label Text="{Binding HKII, Converter={StaticResource ConvertIntToLoaiHanhKiem}}"/>
-            <Label Text="{Binding CaNam, Converter={StaticResource ConvertIntToLoaiHanhKiem}}"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Hạnh kiểm Học kỳ I:"></Label>
+                <Label Text="{Binding HKI, Converter={StaticResource ConvertIntToLoaiHanhKiem}}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Hạnh kiểm Học kỳ II:"></Label>
+                <Label Text="{Binding HKII, Converter={StaticResource ConvertIntToLoaiHanhKiem}}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Hạnh kiểm Cả năm:"></Label>
+
+                <Label Text="{Binding CaNam, Converter={StaticResource ConvertIntToLoaiHanhKiem}}"/>
+            </StackLayout>
+            
+            
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

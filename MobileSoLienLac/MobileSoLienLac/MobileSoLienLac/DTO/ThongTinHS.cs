@@ -96,8 +96,8 @@ namespace MobileSoLienLac.DTO
             HKII = Convert.IsDBNull(dr["HKII"]) ? -1 : Convert.ToInt32(dr["HKII"]);
             CaNam = Convert.IsDBNull(dr["CaNam"]) ? -1 : Convert.ToInt32(dr["CaNam"]);
             Tien = Convert.IsDBNull(dr["Tien"]) ? -1 : Convert.ToInt32(dr["Tien"]);
-            DangKy = Convert.ToByte(dr["DangKy"]);
-            BHQD = Convert.ToByte(dr["BHQD"]);
+            DangKy = Convert.IsDBNull(dr["DangKy"]) ? Convert.ToByte(0) : Convert.ToByte(dr["DangKy"]);
+            BHQD = Convert.IsDBNull(dr["BHQD"]) ? Convert.ToByte(0) : Convert.ToByte(dr["BHQD"]);
         }
 
         #region Handle value
