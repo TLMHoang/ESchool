@@ -37,7 +37,7 @@ namespace MobileSoLienLac
 
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new Login();
+            MainPage = new TestNotify();
             //MainPage = new TestNotify();
         }
 
