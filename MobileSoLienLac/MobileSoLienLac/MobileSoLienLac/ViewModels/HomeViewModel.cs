@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using MobileSoLienLac.DTO;
 using Xamarin.Forms;
 
 using MobileSoLienLac.Models;
+using MobileSoLienLac.Models.SQL;
 using MobileSoLienLac.Views;
 
 namespace MobileSoLienLac.ViewModels
@@ -25,5 +28,13 @@ namespace MobileSoLienLac.ViewModels
             Height = xHeight / 5;
         }
 
+
+        public async Task<int> EditBHYT(int IDStudent, byte BHYT, byte DK)
+        {
+            return await new Helper().ExecuteNonQuery("M_UpdateBHYT",
+                new SqlParameter("@IDHocSinh", SqlDbType.Int) {Value = IDStudent},
+                new SqlParameter("@BHYT", SqlDbType.Bit) { Value = BHYT },
+                new SqlParameter("@DK", SqlDbType.Bit) {Value = DK});
+        }
     }
 }

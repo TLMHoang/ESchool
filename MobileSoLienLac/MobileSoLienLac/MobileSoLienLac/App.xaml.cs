@@ -11,6 +11,9 @@ using MobileSoLienLac.Services;
 using MobileSoLienLac.Views;
 using MobileSoLienLac.Views.Student;
 using System.Security.Permissions;
+using Com.OneSignal;
+using Com.OneSignal.Abstractions;
+using Java.Util;
 using MobileSoLienLac.Views.Notify;
 
 namespace MobileSoLienLac
@@ -30,15 +33,26 @@ namespace MobileSoLienLac
         //public event LoadNotify OnLoadNotify;
 
         public static int IDAccount;
+        public static string UserName = "";
         #endregion
         public App()
         {
             InitializeComponent();
+            
+            Dictionary<string,object> val = new Dictionary<string, object>();
+
 
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new TestNotify();
-            //MainPage = new TestNotify();
+            MainPage = new Login();
+
+            OneSignal.Current.StartInit("24bb2a3a-7946-4823-aad5-5dc026481279")
+                .Settings(new Dictionary<string, bool>() {
+                    { IOSSettings.kOSSettingsKeyAutoPrompt, false },
+                    { IOSSettings.kOSSettingsKeyInAppLaunchURL, false } })
+                .EndInit();
+
+            
         }
 
         public static void ResetSource()
@@ -53,21 +67,8 @@ namespace MobileSoLienLac
             IDAccount = -1;
         }
 
-        //public void Main_OnLoadNoyify()
-        //{
-        //    ISynchronizeInvoke i = (ISynchronizeInvoke)this;
-        //    if (i.InvokeRequired)//tab
-        //    {
-        //        LoadNotify dd = new LoadNotify(Main_OnLoadNoyify);
-        //        i.BeginInvoke(dd, null);
-        //        return;
-        //    }
-        //}
-
         protected override void OnStart()
         {
-            //SqlDependency.Stop(new Helper().connStr);
-            //SqlDependency.Start(new Helper().connStr);
         }
 
         protected override void OnSleep()

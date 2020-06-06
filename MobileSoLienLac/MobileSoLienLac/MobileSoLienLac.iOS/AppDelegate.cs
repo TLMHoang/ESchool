@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Com.OneSignal;
+using Com.OneSignal.Abstractions;
 using Foundation;
 using UIKit;
 
@@ -24,6 +25,11 @@ namespace MobileSoLienLac.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+            OneSignal.Current.StartInit("24bb2a3a-7946-4823-aad5-5dc026481279")
+                .Settings(new Dictionary<string, bool>() {
+                    { IOSSettings.kOSSettingsKeyAutoPrompt, false },
+                    { IOSSettings.kOSSettingsKeyInAppLaunchURL, false } })
+                .EndInit();
 
             return base.FinishedLaunching(app, options);
         }

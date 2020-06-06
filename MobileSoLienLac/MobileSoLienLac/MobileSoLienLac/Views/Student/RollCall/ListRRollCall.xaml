@@ -26,7 +26,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{Binding TrangThai, Converter={StaticResource ConvertByteToColor}}">
+                            <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{Binding TrangThai, Converter={StaticResource ConvertTrangThaiByteToString}}">
                                 <Grid VerticalOptions="CenterAndExpand">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="2*"/>
@@ -43,7 +43,7 @@
                                            Text="{Binding NghiDen, Converter={StaticResource ConvertDateTimeToDate}}"
                                            FontSize="Medium"/>
                                     <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
-                                           Text="{Binding TrangThai, Converter={StaticResource ConvertTrangThaiByteToString}}"
+                                           Text="{Binding TrangThai}"
                                            VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand"
                                            HorizontalTextAlignment="End" HorizontalOptions="CenterAndExpand"/>
                                 </Grid>

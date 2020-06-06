@@ -20,11 +20,14 @@ namespace MobileSoLienLac.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Browse, Title="Home" },
-                new HomeMenuItem {Id = MenuItemType.Notify, Title="Thông Báo" },
-                new HomeMenuItem {Id = MenuItemType.ChangePass, Title="Đổi mật khẩu"},
-                new HomeMenuItem {Id = MenuItemType.About, Title="Thông tin app"},
-                new HomeMenuItem {Id = MenuItemType.Logout, Title="Đăng xuất"}
+                new HomeMenuItem {Id = MenuItemType.Browse, Title = "Home"},
+                new HomeMenuItem {Id = MenuItemType.Notify, Title = "Thông Báo"},
+                new HomeMenuItem {Id = MenuItemType.Point, Title = "Điểm"},
+                new HomeMenuItem {Id = MenuItemType.Fee, Title = "Học phí"},
+                new HomeMenuItem {Id = MenuItemType.TTable, Title = "TKB"},
+                new HomeMenuItem {Id = MenuItemType.ChangePass, Title = "Đổi mật khẩu"},
+                new HomeMenuItem {Id = MenuItemType.About, Title = "Thông tin app"},
+                new HomeMenuItem {Id = MenuItemType.Logout, Title = "Đăng xuất"}
             };
 
             ListViewMenu.ItemsSource = menuItems;

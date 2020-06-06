@@ -12,8 +12,20 @@ namespace MobileSoLienLac.Models.Converters
         {
             try
             {
-                byte val = (byte)value;
-                return (val == 1)?"Đã duyệt":"Chưa duyệt";
+                string val = (string)value;
+                if (val.Equals("Chờ duyệt"))
+                {
+                    return Color.Red;
+                }
+                else if (val.Equals("Đã duyệt"))
+                {
+                    return Color.Green;
+                }
+                else
+                {
+                    return Color.Yellow;
+                }
+                
             }
             catch (Exception e)
             {

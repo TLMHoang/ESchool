@@ -8,6 +8,9 @@ namespace MobileSoLienLac.Models
     {
         Browse,
         Notify,
+        Point,
+        Fee,
+        TTable,
         ChangePass,
         About,
         Logout

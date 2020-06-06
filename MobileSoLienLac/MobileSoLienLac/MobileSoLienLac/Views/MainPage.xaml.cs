@@ -8,10 +8,15 @@ using Xamarin.Forms.Xaml;
 
 using MobileSoLienLac.Models;
 using Android.Widget;
+using Com.OneSignal;
+using Com.OneSignal.Abstractions;
 using MobileSoLienLac.DTO;
-using TableDependency.SqlClient;
-using TableDependency.SqlClient.Base.EventArgs;
-using TableDependency.SqlClient.Base.Enums;
+using MobileSoLienLac.Views.Student;
+using MobileSoLienLac.Views.Student.Fee;
+
+//using TableDependency.SqlClient;
+//using TableDependency.SqlClient.Base.EventArgs;
+//using TableDependency.SqlClient.Base.Enums;
 
 namespace MobileSoLienLac.Views
 {
@@ -25,36 +30,11 @@ namespace MobileSoLienLac.Views
         {
             InitializeComponent();
 
+            OneSignal.Current.SendTag("id_user_PHHS",App.UserName);
+
             MasterBehavior = MasterBehavior.Popover;
 
             MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
-        }
-
-        public void WaitNotify()
-        {
-            string connStr = @"SERVER=125.212.218.20; Initial Catalog=nxtckedu_HeThongSoLienLac; Integrated Security=false; uid= nxtckedu_sa; pwd= H*P*T-1999";
-            using (var result = new SqlTableDependency<LoaiHocSinh>(connStr, "Function"))
-            {
-                result.OnChanged += Result_OnChanged;
-                result.OnError += Result_OnError;
-
-                result.Start();
-            }
-        }
-
-        private void Result_OnError(object sender, ErrorEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Result_OnChanged(object sender, RecordChangedEventArgs<LoaiHocSinh> e)
-        {
-            if (e.ChangeType != ChangeType.None)
-            {
-                var Value = e.Entity;
-                string val = e.ChangeType.ToString() + "\n";
-                DisplayAlert("Thông báo", val + Value.TenLoai, "OK");
-            }
         }
 
         public async Task NavigateFromMenu(int id)
@@ -68,6 +48,15 @@ namespace MobileSoLienLac.Views
                         break;
                     case (int)MenuItemType.Notify:
                         MenuPages.Add(id, new NavigationPage(new NotifyPage()));
+                        break;
+                    case (int)MenuItemType.Point:
+                        MenuPages.Add(id, new NavigationPage(new PointPage()));
+                        break;
+                    case (int)MenuItemType.Fee:
+                        MenuPages.Add(id, new NavigationPage(new ListFeeByMonth()));
+                        break;
+                    case (int)MenuItemType.TTable:
+                        MenuPages.Add(id, new NavigationPage(new TimeTablePage()));
                         break;
                     case (int)MenuItemType.ChangePass:
                         MenuPages.Add(id, new NavigationPage(new ChangePass()));

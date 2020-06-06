@@ -15,8 +15,7 @@ namespace MobileSoLienLac.DTO
         public int IDHocSinh { get; set; }
         public DateTime NghiTu { get; set; }
         public DateTime NghiDen { get; set; }
-        public byte TrangThai { get; set; }
-        public byte ChoHuy { get; set; }
+        public string TrangThai { get; set; }
         public string LyDo { get; set; }
 
         public XinPhep()
@@ -25,19 +24,17 @@ namespace MobileSoLienLac.DTO
             IDHocSinh = -1;
             NghiTu = DateTime.Now;
             NghiDen = DateTime.Now;
-            TrangThai = 0;
-            ChoHuy = 0;
+            TrangThai = "";
             LyDo = "";
         }
 
-        public XinPhep(int iD, int iDHocSinh, DateTime nghiTu, DateTime nghiDen, byte trangThai, byte choHuy, string lyDo)
+        public XinPhep(int iD, int iDHocSinh, DateTime nghiTu, DateTime nghiDen, string trangThai, string lyDo)
         {
             ID = iD;
             IDHocSinh = iDHocSinh;
             NghiTu = nghiTu;
             NghiDen = nghiDen;
             TrangThai = trangThai;
-            ChoHuy = choHuy;
             LyDo = lyDo;
         }
 
@@ -47,8 +44,7 @@ namespace MobileSoLienLac.DTO
             IDHocSinh = Convert.IsDBNull(dr["IDHocSinh"]) ? -1 : Convert.ToInt32(dr["IDHocSinh"]);
             NghiTu = Convert.ToDateTime(dr["NghiTu"]);
             NghiDen = Convert.ToDateTime(dr["NghiDen"]);
-            TrangThai = Convert.ToByte(dr["TrangThai"]);
-            ChoHuy = Convert.ToByte(dr["ChoHuy"]);
+            TrangThai = dr["TenTrangThai"].ToString();
             LyDo = dr["LyDo"].ToString();
         }
 

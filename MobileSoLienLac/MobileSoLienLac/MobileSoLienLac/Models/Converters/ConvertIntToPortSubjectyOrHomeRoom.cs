@@ -13,7 +13,7 @@ namespace MobileSoLienLac.Models.Converters
             try
             {
                 int val = (int) value;
-                return val == -1 ? "Giáo viên bộ môn" : "Giáo viên chủ nhiệm";
+                return val != App.StudentSeclect.IDLop ? "Giáo viên bộ môn" : "Giáo viên chủ nhiệm";
             }
             catch (Exception e)
             {

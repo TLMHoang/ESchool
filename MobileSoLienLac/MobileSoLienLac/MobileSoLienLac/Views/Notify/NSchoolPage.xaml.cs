@@ -40,7 +40,7 @@ namespace MobileSoLienLac.Views.Notify
                     if (lvLstNotify.SelectedItem != null)
                     {
                         ValueDTO<ThongBaoTruong> val = await valThongBaoTruong.GetContent((int) ((NotifyViewModel) e.SelectedItem).ID);
-                        if (val.Error != 1)
+                        if (val.Error != 0)
                         {
                             await DisplayAlert("Thông báo",
                                 new HandleError().IDErrorToNotify(val.Error), "OK");
@@ -69,7 +69,7 @@ namespace MobileSoLienLac.Views.Notify
 
         public async void NotifySchool()
         {
-            ValueDTO<NotifyModel> val = await new NotifyViewModel().NotifySchool();
+                ValueDTO<NotifyModel> val = await new NotifyViewModel().NotifySchool();
             if (val.Error != 0)
             {
                 lblNotify.Text = "Vui lòng thử lại.";

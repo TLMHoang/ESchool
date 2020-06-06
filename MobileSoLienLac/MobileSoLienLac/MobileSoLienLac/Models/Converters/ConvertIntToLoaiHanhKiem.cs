@@ -14,7 +14,7 @@ namespace MobileSoLienLac.Models.Converters
             try
             {
                 int val = (int)value;
-                return (val == -1)? "Chưa xếp hạnh" : App.lstLoaiHanhKiems.FirstOrDefault(p => p.ID == val).TenHanhKiem;
+                return (val == -1)? "Chưa xếp hạng" : App.lstLoaiHanhKiems.FirstOrDefault(p => p.ID == val).TenHanhKiem;
             }
             catch (Exception e)
             {

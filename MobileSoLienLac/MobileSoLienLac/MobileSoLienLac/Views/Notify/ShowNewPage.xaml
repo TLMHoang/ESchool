@@ -6,10 +6,12 @@
              mc:Ignorable="d"
              x:Class="MobileSoLienLac.Views.Notify.ShowNewPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="lblContent" FontSize="Large"/>
-            <Label x:Name="lblDate"
-                   HorizontalOptions="EndAndExpand"/>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Label x:Name="lblContent" FontSize="Large"/>
+                <Label x:Name="lblDate"
+                       HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

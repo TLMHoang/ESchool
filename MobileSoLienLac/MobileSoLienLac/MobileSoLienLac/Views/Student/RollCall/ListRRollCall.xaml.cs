@@ -175,13 +175,17 @@ namespace MobileSoLienLac.Views.Student.RollCall
                 if (ListViewRRollCall.SelectedItem != null)
                 {
                     ItemSelect = (XinPhep)ListViewRRollCall.SelectedItem;
-                    if (ItemSelect.TrangThai == 1)
+                    if (ItemSelect.TrangThai.Equals("Chờ duyệt"))
                     {
                         PickerChooseTrue.Focus();
                     }
-                    else
+                    else if (ItemSelect.TrangThai.Equals("Đã duyệt"))
                     {
                         PickerChooseFalse.Focus();
+                    }
+                    else
+                    {
+                        return;
                     }
                 }
 

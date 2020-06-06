@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "718078117567",
+    "firebase_url": "https://solienlacdientu-47bca.firebaseio.com",
+    "project_id": "solienlacdientu-47bca",
+    "storage_bucket": "solienlacdientu-47bca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718078117567:android:9f95e350e0beb4380a280a",
+        "android_client_info": {
+          "package_name": "com.companyname.eschool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718078117567-9m6bmme8ovof7e15e9up1vdhgk8jnt46.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4RWHb_PT8kLWE37ALL3TLkupa-Kj0BZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718078117567-9m6bmme8ovof7e15e9up1vdhgk8jnt46.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

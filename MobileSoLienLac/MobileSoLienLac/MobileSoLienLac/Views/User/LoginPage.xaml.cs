@@ -137,6 +137,7 @@ namespace MobileSoLienLac.Views
                     if (tk.ListT.Count == 1)
                     {
                         App.IDAccount = tk.ListT[0].ID;
+                        App.UserName = tk.ListT[0].UserName;
                         if (await LoadDataInDatabase())
                         {
                             await DisplayAlert("Thông báo", "Đăng nhập thành công", "Ok");

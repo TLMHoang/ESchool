@@ -6,23 +6,97 @@
              mc:Ignorable="d"
              x:Class="MobileSoLienLac.Views.Student.SummaryPage">
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Hạnh kiểm Học kỳ I:"></Label>
-                <Label Text="{Binding HKI, Converter={StaticResource ConvertIntToLoaiHanhKiem}}"/>
+        <ScrollView>
+            <StackLayout>
+                <Label x:Name="lbl" Text="Học kỳ I"></Label>
+                    <Frame x:Name="FrameHKI">
+                        <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="TapHKI" Tapped="TapHKI_OnTapped"></TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Hạnh kiểm:"></Label>
+                            <Label Text="{Binding HK.HKI, Converter={StaticResource ConvertIntToLoaiHanhKiem}}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Điểm Trung bình"></Label>
+                            <Label Text="{Binding Sum.HKI}"/>
+                        </StackLayout>
+                        <ListView x:Name="ListViewHKI" IsVisible="False" ItemsSource="{Binding LstDTBI}" RowHeight="30" SelectionMode="None" Margin="20,0,0,0">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding TenMon}"></Label>
+                                            <Label Text="{Binding Diem}"></Label>
+                                        </StackLayout>  
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </Frame>
+                <Label Text="Học kỳ II"></Label>
+                <Frame>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="TapHKII" Tapped="TapHKII_OnTapped"></TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Hạnh kiểm :"></Label>
+                            <Label Text="{Binding HK.HKII, Converter={StaticResource ConvertIntToLoaiHanhKiem}}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Điểm Trung bình"></Label>
+                            <Label Text="{Binding Sum.HKII}"/>
+                        </StackLayout>
+                        <ListView x:Name="ListViewHKII" 
+                                  IsVisible="False" 
+                                  ItemsSource="{Binding LstDTBII}" 
+                                  RowHeight="30" SelectionMode="None" Margin="20,0,0,0">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding TenMon}"></Label>
+                                            <Label Text="{Binding Diem}"></Label>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </Frame>
+                <Label Text="Cả năm"></Label>
+                <Frame>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="TapCN" Tapped="TapCN_OnTapped"></TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Hạnh kiểm:"></Label>
+                            <Label Text="{Binding HK.CaNam, Converter={StaticResource ConvertIntToLoaiHanhKiem}}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Điểm Trung bình"></Label>
+                            <Label Text="{Binding Sum.CaNam}"/>
+                        </StackLayout>
+                        <ListView x:Name="ListViewCN" IsVisible="False" ItemsSource="{Binding LstDTBCN}" RowHeight="30" SelectionMode="None" Margin="20,0,0,0">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding TenMon}"></Label>
+                                            <Label Text="{Binding Diem}"></Label>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </Frame>
+                
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Hạnh kiểm Học kỳ II:"></Label>
-                <Label Text="{Binding HKII, Converter={StaticResource ConvertIntToLoaiHanhKiem}}"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Hạnh kiểm Cả năm:"></Label>
-
-                <Label Text="{Binding CaNam, Converter={StaticResource ConvertIntToLoaiHanhKiem}}"/>
-            </StackLayout>
-            
-            
-            
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
